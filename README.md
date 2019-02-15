@@ -3,7 +3,7 @@
 <div align="center">
 
 一套轻量级的 moment 格式化及计算时间的组件。
-<p style="color: #f00">*该版本仅用于测试<p>
+<p style="color: #f00;">*该版本仅用于测试<p>
 
 ![](https://img.shields.io/badge/version-v0.0.0-green.svg)
 </div>

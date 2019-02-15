@@ -3,12 +3,12 @@
 <div align="center">
 
 A lightweight moment formatting and timing components.
-<p style="color: #f00">*This version is for testing only<p>
+<p style="color: #f00;">*This version is for testing only<p>
 
 ![](https://img.shields.io/badge/version-v0.0.0-green.svg)
 </div>
 
-简体中文 | [English](./README-en.md)
+[简体中文](./README.md) | English
 
 ## ✨ Features
 

@@ -7,6 +7,7 @@
 
 ![](https://img.shields.io/badge/version-v0.0.0-green.svg)
 ![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
+![](https://img.shields.io/bundlephobia/min/js-moment.svg?style=flat)
 </div>
 
 简体中文 | [English](./README-en.md)

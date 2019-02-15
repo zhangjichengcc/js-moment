@@ -1,29 +1,21 @@
-<p align="center">
-  <a href="http://ant.design">
-    <img width="200" src="https://zhangjichengcc.github.io/blog/css/images/logo_md.png">
-  </a>
-</p>
-
-<h1 align="center">DaiDai</h1>
+<h1 align="center">moments</h1>
 
 <div align="center">
 
-一套轻量级的 博客框架 和 hexo 实现。
+一套轻量级的 moment 格式化及计算时间的组件。
 
-![](https://img.shields.io/badge/version-v1.0.0-green.svg)
+![](https://img.shields.io/badge/version-v0.0.0-green.svg)
 </div>
 
 简体中文 | [English](./README-en.md)
 
 ## ✨ 特性
 
-- 开箱即用的高质量 hexo 组件。
+- 引入即用的高质量轻量 moment 组件。
 
 ## 🖥 支持环境
 
 * 现代浏览器和 IE9 及以上。
-* 支持服务端渲染。
-* [Electron](http://electron.atom.io/)
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Electron |
 | --------- | --------- | --------- | --------- | --------- | --------- |
@@ -32,23 +24,16 @@
 ## 📦 安装
 
 ```bash
-npm install daidai --save
+npm install --save-dev moments
 ```
 
 ## 🔨 示例
 
 ```jsx
-import { DatePicker } from 'antd';
-ReactDOM.render(<DatePicker />, mountNode);
+import moments from 'moments';
+moments(t).format('YYYY-MM-DD');
+moments(t).addDay(1);
 ```
-
-引入样式：
-
-```jsx
-import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
-```
-
-你也可以 [按需加载组件](https://ant.design/docs/react/getting-started-cn#按需加载)。
 
 ### TypeScript
 
@@ -61,17 +46,6 @@ import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 ## 🔗 链接
 
 - [首页](https://zhangjichengcc.github.io/blog/)
-
-## ⌨️ 本地开发
-
-```bash
-$ git clone git@github.com:ant-design/ant-design.git
-$ cd ant-design
-$ npm install
-$ npm start
-```
-
-打开浏览器访问 http://127.0.0.1:8001 ，更多[本地开发文档](https://github.com/ant-design/ant-design/wiki/Development)。
 
 ## 🤝 参与共建 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 

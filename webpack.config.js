@@ -19,19 +19,19 @@ module.exports = {
   //处理模块资源
   module: {
     rules: [
-      { //处理js文件
-        test: /\.js$/,
-        use: [{
-          loader: "babel-loader",
-          // options: {
-          //   //使用env预设来处理es6语法的js文件
-          //   presets: ['env']
-          // }
-        }],
-        exclude: [
-          path.resolve(__dirname, './node_modules')
-        ]
-      },
+      // { //处理js文件
+      //   test: /\.js$/,
+      //   use: [{
+      //     loader: "babel-loader",
+      //     // options: {
+      //     //   //使用env预设来处理es6语法的js文件
+      //     //   presets: ['env']
+      //     // }
+      //   }],
+      //   exclude: [
+      //     path.resolve(__dirname, './node_modules')
+      //   ]
+      // },
     ]
   }
 };

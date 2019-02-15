@@ -1,4 +1,4 @@
-<h1 align="center">moments</h1>
+<h1 align="center">js-moment</h1>
 
 <div align="center">
 
@@ -24,15 +24,15 @@
 ## 📦 安装
 
 ```bash
-npm install --save-dev moments
+npm install --save-dev js-moment
 ```
 
 ## 🔨 示例
 
 ```jsx
-import moments from 'moments';
-moments(t).format('YYYY-MM-DD');
-moments(t).addDay(1);
+import moment from 'js-moment';
+moment(t).format('YYYY-MM-DD');
+moment(t).addDay(1);
 ```
 
 ### TypeScript

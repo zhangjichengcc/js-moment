@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>js-moment</title>
+  <!-- <link rel="icon" href="/favicon.png" type="image/x-icon"> -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="./dist/index.js"></script>
+  <style>
+    * {
+      box-sizing: border-box; 
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    #root {
+      position: relative;
+      padding: 10px;
+      max-width: 500px;
+      height: 100%;
+      margin: 0 auto;
+      background-color: #eceff185;
+    }
+    .info {
+      position: relative;
+      font-size: 12px;
+    }
+    .info p {
+      margin: 0;
+      margin-bottom: 1px;
+    }
+  </style>
+</head>
+<body>
+<div id="root">
+  <h2>js-moment</h2>
+  <!-- 当前时间 -->
+  <h4 class="now" style="margin-bottom: 0;"></h4>
+  <h4 class="nowTime" style="margin-top: 0;"></h4>
+  <!-- 时间计算结果 -->
+  
+  <!-- 时间计算参数 -->
+  <div style="padding: 10px; background-color: #eee; position: relative; padding-bottom: 70px;">
+    <h4 style="margin: 0 0 10px 0">日期计算结果: </h4>
+    <h5 style="margin: 0 0 10px 0">日期：<span class="test"></span></h5>
+    <h5 style="margin: 0 0 20px 0">时间戳：<span class="testTime"></span></h5>
+    <h4 style="margin: 0 0 10px 0">日期参数:</h4>
+    <div style="position: relative; margin-bottom: 10px;">
+      <span>日期格式：</span>
+      <input style="position: absolute; right: 0;" id="format" type="text" name="format" value="YYYY-MM-DD hh:mm:ss">
+    </div>
+    <div style="position: relative;">
+      <span>日期加减（天）：</span>
+      <input style="position: absolute; right: 0;" id="add_day" type="text" name="addDay" value="0">
+    </div>
+    <h4 style="margin: 20px 0 10px 0">代码: </h4>
+    <div style="background-color: #000; color: #f5f5f5; padding: 10px; font-size: 12px;">
+      <span style="display: block; margin-bottom: 10px;">
+        <span style="color: #ffeb3b;">></span>
+        <span id="code1">adsfasdfasddfasf</span>
+      </span>
+      <span style="display: block">
+        <span style="color: #ffeb3b;">></span>
+        <span id="code2">adsfasdfasddfasf</span>
+      </span>
+    </div>
+    <input style="margin-top: 15px; position: absolute; right: 10px; bottom: 10px;" id="res_btn" type="button" name="res_btn" value="计算时间">
+  </div>
+  <div class="info">
+    <p>开发人员：张吉成</p>
+    <p>email： zhangjichengcc@163.com</p>
+    <p>项目github地址： <a href="https://github.com/zhangjichengcc/moments">https://github.com/zhangjichengcc/moments</a></p>
+    <p>安装： npm install --save-dev js-moment </p>
+  </div>
+</div>
+</body>
+</html>

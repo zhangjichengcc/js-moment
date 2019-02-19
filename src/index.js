@@ -3,6 +3,7 @@
  *
  * @date 2018-11-06
  * @author zhangjicheng
+ * @email zhangjichengcc@163.com
  */
 
 const moment = (date) => {
@@ -67,4 +68,4 @@ const moment = (date) => {
   return new Moment(time);
 }
 
-export default moments;
+export default moment;

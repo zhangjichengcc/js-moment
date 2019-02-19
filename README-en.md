@@ -3,7 +3,6 @@
 <div align="center">
 
 A lightweight moment formatting and timing components.
-<p style="color: #f00;">*This version is for testing only<p>
 
 ![](https://img.shields.io/badge/version-v0.0.0-green.svg)
 </div>
@@ -29,23 +28,29 @@ npm install --save-dev js-moment
 
 yarn add js-moment
 ```
+After downloading the project, you can find the js-moment/demo/index.html in node_modules.
 
 ## 🔨 Usage
 
 ```jsx
 import moment from 'js-moment';
 moment(t).format('YYYY-MM-DD');
+moment(t).format('YYYY-MM-DD hh:mm:ss');
+moment(t).format('YYYY年MM月DD日');
+moment(t).format('YY-M-D h:m:s');
 moment(t).addDay(1);
+moment(t).getTime();
 ```
 
-### TypeScript
-
-See Use in TypeScript.[See Use in TypeScript.](https://ant.design/docs/react/use-in-typescript-cn)
-
-## 🌍 Internationalization
-
-
 ## 🔗 Links
+
+- [Github](https://github.com/zhangjichengcc/moments)
+- [MyBlog](https://zhangjichengcc.github.io/blog)
+
+## 🤝 part
+
+- author zhangjicheng
+- Email zhangjichengcc@163.com
 
 
 

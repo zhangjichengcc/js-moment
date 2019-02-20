@@ -5,7 +5,7 @@
 一套轻量级的 moment 格式化及计算时间的组件。
 
 <!-- ![](https://img.shields.io/badge/version-v0.0.0-green.svg) -->
-![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
+![](https://img.shields.io/npm/v/js-moment-green.svg?style=flat)
 ![](https://img.shields.io/bundlephobia/min/js-moment.svg?style=flat)
 </div>
 
@@ -25,10 +25,10 @@
 
 ## 📦 安装
 
+*目前只支持es6的 import 导入，后期会逐步完善*
 ```bash
 npm install --save-dev js-moment
 
-yarn add js-moment
 ```
 项目下载完成后可以在node_modules中找到 js-moment/demo/index.html 查看例子
 

@@ -4,7 +4,8 @@
 
 A lightweight moment formatting and timing components.
 
-![](https://img.shields.io/badge/version-v0.0.0-green.svg)
+![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
+![](https://img.shields.io/bundlephobia/min/js-moment.svg?style=flat)
 </div>
 
 [简体中文](./README.md) | English
@@ -22,6 +23,7 @@ A lightweight moment formatting and timing components.
 | IE9, IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 ## 📦 Install
+*Currently, o*nly es6 import is supported, which will be gradually improved in the later stage*
 
 ```bash
 npm install --save-dev js-moment

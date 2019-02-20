@@ -5,7 +5,7 @@
 一套轻量级的 moment 格式化及计算时间的组件。
 
 <!-- ![](https://img.shields.io/badge/version-v0.0.0-green.svg) -->
-![](https://img.shields.io/npm/v/js-moment-green.svg?style=flat)
+![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
 ![](https://img.shields.io/bundlephobia/min/js-moment.svg?style=flat)
 </div>
 

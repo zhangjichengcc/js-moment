@@ -5,7 +5,7 @@
  * @author zhangjicheng
  * @eamil zhangjichengcc@163.com
  */
-import moment from '../index.js';
+import moment from '../dist/index.js';
 global.moment = moment;
 $(document).ready(function () {
   // 初始化变量

@@ -1,4 +1,3 @@
-// import moment from './src/index';
-const moment = '66666';
-console.log(moment);
+import moment from './src/index';
+
 export default moment;

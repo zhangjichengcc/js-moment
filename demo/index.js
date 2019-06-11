@@ -7,20 +7,20 @@
  */
 
 import moment from '../index.js';
-
+window.momentss = moment;
 $(document).ready(function () {
   // 初始化变量
   let format = $('#format').val();
   let res = moment().format();
-  let resTime = moment(moment().format()).getTime();
+  let resTime = moment().getTime();
   let code1 = `moment('${res}').format('${format});`;
-  let code2 = `moment('${res}').getTime)();`;
+  let code2 = `moment('${res}').getTime();`;
 
   $('.now').html(`当前时间: ${moment().format()}`);
-  $('.nowTime').html(`时间戳: ${moment(moment().format()).getTime()}`);
+  $('.nowTime').html(`时间戳: ${moment().getTime()}`);
   setInterval(() => {
     $('.now').html(`当前时间: ${moment().format()}`);
-    $('.nowTime').html(`时间戳: ${moment(moment().format()).getTime()}`);
+    $('.nowTime').html(`时间戳: ${moment().getTime()}`);
   }, 1000);
 
   // 计算结果

@@ -1,9 +1,10 @@
 {
   "name": "js-moment",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "时间格式化及计算方法",
   "private": false,
-  "main": "./dist/index.js",
+  "main": "./index.js",
+  "module": "./index.js",
   "jsnext:main": "./index.js",
   "scripts": {
     "start": "webpack-dev-server",

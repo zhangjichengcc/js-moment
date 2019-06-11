@@ -7,7 +7,7 @@
  */
 
 import moment from '../index.js';
-window.momentss = moment;
+window.moment = moment;
 $(document).ready(function () {
   // 初始化变量
   let format = $('#format').val();

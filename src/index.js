@@ -8,7 +8,7 @@
 
 const moment = (date) => {
   const now = new Date();
-  const time = date ? new Date(date) : now;
+  const time = date ? new Date(date.replace(/\-/g, '/')) : now;
   const formatRule = (d) => {
     const dtime = d || new Date();
     return {

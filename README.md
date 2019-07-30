@@ -32,6 +32,33 @@ npm install --save-dev js-moment
 ```
 项目下载完成后可以在node_modules中找到 js-moment/demo/index.html 查看例子
 
+## 参数及使用说明
+
+
+>#### 方法
+|方法名|参数类型|默认值|方法说明|
+|---|---|---|---|
+|format| String| 'YYYY-MM-DD HH:MM:SS' | 格式化时间|
+|addTime| Int, String| 0, 'h' | 时间加减，默认为小时（h）, 相应的，分钟（m）, 秒（s）|
+|addDay| Int| 0 | 天数加减|
+|addWeek| Int| 0| 星期加减|
+|addMonth| Int|0| 月份加减|
+|addYear| Int| 0| 年份加减|
+|getTime| null| ‘’| 获取时间戳|
+
+>#### 属性
+|属性名|说明|
+|--|--|
+|date|标准 Date对象|
+|dateObject| 包含年(year), 月(month), 日(day), 时(hours), 分(minutes), 秒(seconds)的对象集合,**注意：month 的值为（0 - 11）*|
+
+> **2.0版本以后支持方法的链式使用，如: `moment(t).addDay(1).addMonth(1).format()`**   
+> 2.0版本之前只支持方法的嵌套使用，如： `moment(moment(t).addDay(1)).format()`
+
+> moment() 会返回一个 Moment 实例对象, 包含上述等方法及属性，
+
+> 修复ios设备格式化时间显示 NAN 的bug
+
 ## 🔨 示例
 
 ```js
@@ -40,7 +67,10 @@ moment(t).format('YYYY-MM-DD');
 moment(t).format('YYYY-MM-DD hh:mm:ss');
 moment(t).format('YYYY年MM月DD日');
 moment(t).format('YY-M-D h:m:s');
-moment(t).addDay(1);
+moment(t).addDay(1).format();
+moment(t).addDay(1).addWeek(1).addMonth(1).addYear(1).format();
+moment(t).addTime(1);
+moment(t).addTime(1, 'h').addTime(1, 'm').addTime(1, 's');
 moment(t).getTime();
 ```
 

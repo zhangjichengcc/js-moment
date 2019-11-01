@@ -8,7 +8,7 @@
 
 const moment = (date) => {
   const now = new Date();
-  const time = date ? new Date(date.replace(/\-/g, '/')) : now;
+  const time = date ? new Date(date.replace(/-/g, '/')) : now;
   const formatRule = (d) => {
     const dtime = d || new Date();
     return {
@@ -42,7 +42,7 @@ const moment = (date) => {
 
   };
   const defFormat = 'YYYY-MM-DD hh:mm:ss';
-  const setDateObj = (newDate ) => {
+  const setDateObj = (newDate) => {
     const nd = newDate || new Date();
     return {
       year: nd.getFullYear(),
@@ -118,9 +118,82 @@ const moment = (date) => {
       return this;
     }
 
-    // getTime
+    // 获得时间戳
     getTime() {
-      return this.date.getTime();;
+      return this.date.getTime();
+    }
+
+    // 日期算法 相对时间
+    // 注：每个月按30天处理
+    fromTo(t) {
+      const { date: oldDate } = this;
+      const { date: newDate } = moment(t);
+      const getTimes = newDate.getTime() - oldDate.getTime();
+      const tag = getTimes >= 0 ? '+' : '-';
+      const ms = Math.abs(getTimes);
+      // 总计数
+      const Y = Math.floor(ms / (1000 * 60 * 60 * 24 * 30 * 12));
+      const M = Math.floor(ms / (1000 * 60 * 60 * 24 * 30));
+      const D = Math.floor(ms / (1000 * 60 * 60 * 24));
+      const h = Math.floor(ms / (1000 * 60 * 60));
+      const m = Math.floor(ms / (1000 * 60));
+      const s = Math.floor(ms / 1000);
+      // 分别包括数
+      const years = Y;
+      const months = M - Y * 12;
+      const days = D - M * 30;
+      const hours = h - D * 24;
+      const minutes = m - h * 60;
+      const seconds = s - m * 60;
+      const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
+      const total = { years, months, days, hours, minutes, seconds };
+      // 格式化相对日期
+      const format = rule => {
+        let str = '';
+        if (rule) {
+          str = rule;
+          const objs = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
+          const keys = ['Y', 'M', 'D', 'h', 'm', 's'];
+          for (let i = 0; i < keys.length; i += 1) {
+            const key = keys[i];
+            if (rule.includes(key)) {
+              // eslint-disable-next-line no-eval
+              objs[key] = eval(key);
+              break;
+            } else {
+              objs[key] = null;
+            }
+          }
+          Object.keys(objs).forEach(key => {
+            str = str.replace(key, objs[key])
+          })
+        } else if (years) {
+          str = `${years}年${months ? `${months}个月` : ''}${tag === '+' ? '后':'前'}`;
+        } else if (months) {
+          str = `${months}个月${days ? `${days}天` : ''}${tag === '+' ? '后':'前'}`;
+        } else if (days) {
+          str = `${days}天${hours ? `${hours}小时` : ''}${tag === '+' ? '后':'前'}`;
+        } else if (hours) {
+          str = `${hours}小时${minutes ? `${minutes}分钟` : ''}${tag === '+' ? '后':'前'}`;
+        } else if (minutes) {
+          str = `${minutes}分钟${seconds ? `${seconds}秒` : ''}${tag === '+' ? '后':'前'}`;
+        } else {
+          str = `${seconds}秒${tag === '+' ? '后':'前'}`;
+        }
+        return str;
+      }
+      return {
+        times,
+        total,
+        tag,
+        years,
+        months,
+        days,
+        hours,
+        minutes,
+        seconds,
+        format,
+      }
     }
   }
   return new Moment(time);

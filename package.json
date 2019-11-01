@@ -1,6 +1,6 @@
 {
   "name": "js-moment",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "时间格式化及计算方法",
   "private": false,
   "main": "./index.js",
@@ -13,11 +13,8 @@
   "author": "张吉成",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^1.0.1",
     "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3",
@@ -31,5 +28,10 @@
     "validate",
     "timestamp",
     "addDay"
-  ]
+  ],
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6"
+  }
 }

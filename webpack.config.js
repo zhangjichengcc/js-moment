@@ -3,15 +3,16 @@ const cleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: {
-    // 定义多入口，key即为文件名，可如此声明来分别存储生成文件路径
-    'dist/index': './main.js',
-    // 'demo/dist/index': './demo/index.js'
-  },
+  // entry: {
+  //   // 定义多入口，key即为文件名，可如此声明来分别存储生成文件路径
+  //   'dist/index': './src/index.js',
+  // },
+  entry: './src/index.js',
   output: {
-    filename: '[name].[hash:5].js',
-    // path: path.resolve(__dirname, 'dist')
-    path: __dirname
+    // filename: '[name].[hash:5].js',
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist')
+    // path: __dirname
   },
   target: 'node',
   node: {

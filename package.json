@@ -1,9 +1,9 @@
 {
   "name": "js-moment",
-  "version": "2.1.0",
+  "version": "2.1.5",
   "description": "时间格式化及计算方法",
   "private": false,
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "module": "./index.js",
   "jsnext:main": "./index.js",
   "scripts": {

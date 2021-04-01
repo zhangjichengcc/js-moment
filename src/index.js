@@ -1,47 +1,64 @@
-/**
- * 日期处理方法
- *
- * @date 2018-11-06
- * @author zhangjicheng
- * @email zhangjichengcc@163.com
- */
-
 const moment = (date) => {
   const now = new Date();
   const time = date ? new Date(date.replace(/-/g, '/')) : now;
+
+  /* 格式化规则 */
   const formatRule = (d) => {
     const dtime = d || new Date();
+
+    const _year = dtime.getFullYear();
+    const _month = (dtime.getMonth() + 1);
+    const _day = dtime.getDate();
+    const _hours = dtime.getHours();
+    const _minutes = dtime.getMinutes();
+    const _seconds = dtime.getSeconds();
+    const _weeks = dtime.getDay();
+    const _quarter = parseInt((_month - 1)/3) + 1;
+
     return {
       // 年
-      YYYY: dtime.getFullYear().toString(),
-      yyyy: dtime.getFullYear().toString(),
-      YY: dtime.getFullYear().toString().replace(/^[0-9]{2}([0-9]{2})$/,'$1'),
-      yy: dtime.getFullYear().toString().replace(/^[0-9]{2}([0-9]{2})$/,'$1'),
-      y: dtime.getFullYear().toString(),
-      Y: dtime.getFullYear().toString(),
+      YYYY: _year.toString(),
+      yyyy: _year.toString(),
+      YY: _year.toString().replace(/^[0-9]{2}([0-9]{2})$/,'$1'),
+      yy: _year.toString().replace(/^[0-9]{2}([0-9]{2})$/,'$1'),
+      y: _year.toString(),
+      Y: _year.toString(),
       // 月
-      MM: (dtime.getMonth()+1).toString().replace(/^([0-9]{1})$/,'0$1'),
-      M: (dtime.getMonth()+1).toString(),
+      MM: _month.toString().padStart(2, '0'),
+      M: _month.toString(),
       // 日
-      DD: dtime.getDate().toString().replace(/^([0-9]{1})$/,'0$1'),
-      dd: dtime.getDate().toString().replace(/^([0-9]{1})$/,'0$1'),
-      D: dtime.getDate().toString(),
-      d: dtime.getDate().toString(),
+      DD: _day.toString().padStart(2, '0'),
+      dd: _day.toString().padStart(2, '0'),
+      D: _day.toString(),
+      d: _day.toString(),
       // 时
-      HH: dtime.getHours().toString().replace(/^([0-9]{1})$/,'0$1'),
-      hh: dtime.getHours().toString().replace(/^([0-9]{1})$/,'0$1'),
-      H: dtime.getHours() > 12 ? (dtime.getHours() % 12).toString() : (dtime.getHours()).toString(),
-      h: dtime.getHours() > 12 ? (dtime.getHours() % 12).toString() : (dtime.getHours()).toString(),
+      HH: _hours.toString().padStart(2, '0'),
+      H: _hours.toString(),
+      hh: _hours === 12 ? '12' : (_hours % 12).toString().padStart(2, '0'),
+      h:  _hours === 12 ? '12' : (_hours % 12).toString(),
       // 分
-      mm: dtime.getMinutes().toString().replace(/^([0-9]{1})$/,'0$1'),
-      m: dtime.getMinutes().toString(),
+      mm: _minutes.toString().padStart(2, '0'),
+      m: _minutes.toString(),
       // 秒
-      ss: dtime.getSeconds().toString().replace(/^([0-9]{1})$/,'0$1'),
-      s: dtime.getSeconds().toString(),
+      ss: _seconds.toString().padStart(2, '0'),
+      s: _seconds.toString(),
+      // 星期
+      W: ['日', '一', '二', '三', '四', '五', '六'][_weeks],
+      w: _weeks, 
+      // 上午/下午
+      AA: _hours < 12 ? '上午' : '下午',
+      A: _hours < 12 ? 'AM' : 'PM',
+      a: _hours < 12 ? 'am' : 'pm',
+      // 季度
+      Q: ['一', '二', '三', '四'][_quarter],
+      q: _quarter,
     }
-
   };
+
+  // 默认格式
   const defFormat = 'YYYY-MM-DD hh:mm:ss';
+
+  // 生成时间对象
   const setDateObj = (newDate) => {
     const nd = newDate || new Date();
     return {
@@ -51,6 +68,7 @@ const moment = (date) => {
       hours: nd.getHours(),
       minutes: nd.getMinutes(),
       seconds: nd.getSeconds(),
+      week: nd.getDay(),
     }
   }
   class Moment{
@@ -62,12 +80,12 @@ const moment = (date) => {
     // 日期格式化
     format(format = defFormat) {
       let formatStr = format;
-      const keys = Object.keys(formatRule(this.date));
+      const formatObjs = formatRule(this.date)
+      const keys = Object.keys(formatObjs);
       keys.forEach(key => {
-        formatStr = formatStr.replace(key, formatRule(this.date)[key]);
+        formatStr = formatStr.replace(key, formatObjs[key]);
       })
-      this.formatDate = formatStr;
-      return formatStr;
+      return this.formatDate = formatStr;
     }
 
     // 日期算法 时间加减 h/m/s
@@ -92,7 +110,7 @@ const moment = (date) => {
     // 日期算法 星期加减
     addWeek(val = 0) {
       if(!this.date) return false;
-      const newDate = new Date(this.date.getTime()+val*24*60*60*1e3*7);
+      const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3 * 7);
       this.date = newDate;
       this.dateObject = setDateObj(newDate);
       return this;
@@ -199,4 +217,7 @@ const moment = (date) => {
   return new Moment(time);
 }
 
-export default moment;
+console.log(moment().format('YYYY-MM-DD 星期W a h:m:s'));
+console.log(moment('2019-10-31 23:00:01').format('YYYY-MM-DD W AA h:m:s'));
+
+// export default moment;

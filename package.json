@@ -1,6 +1,6 @@
 {
   "name": "js-moment",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "description": "时间格式化及计算方法",
   "private": false,
   "main": "./dist/index.js",

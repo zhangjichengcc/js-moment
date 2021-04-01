@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2021-04-01 17:28:55
+ * @LastEditTime: 2021-04-01 17:49:08
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \moments\webpack.config.js
@@ -12,6 +12,19 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: './src/index.js',
+  mode: 'production',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',

@@ -93,8 +93,10 @@ const moment = (date: string | Date) => {
       let formatStr = format;
       const formatObjs = formatRule(this.date)
       const keys = Object.keys(formatObjs);
-      keys.forEach((key: string) => {
+      keys.forEach((key: keyof typeof formatObjs) => {
         const reg = new RegExp(key, 'g');
+        // formatStr = formatStr.replace(reg, (formatObjs as unknown as keyof typeof formatObjs)[key]);
+        // @ts-ignore
         formatStr = formatStr.replace(reg, formatObjs[key]);
       })
       return this.formatDate = formatStr;
@@ -155,7 +157,7 @@ const moment = (date: string | Date) => {
 
     // 日期算法 相对时间
     // 注：每个月按30天处理
-    fromTo(t) {
+    fromTo(t: string | Date) {
       const { date: oldDate } = this;
       const { date: newDate } = moment(t);
       const getTimes = newDate.getTime() - oldDate.getTime();
@@ -178,16 +180,15 @@ const moment = (date: string | Date) => {
       const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
       const total = { years, months, days, hours, minutes, seconds };
       // 格式化相对日期
-      const format = rule => {
+      const format = (rule: string) => {
         let str = '';
         if (rule) {
           str = rule;
-          const objs = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
+          const objs: {[key: string]: any} = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
           const keys = ['Y', 'M', 'D', 'h', 'm', 's'];
           for (let i = 0; i < keys.length; i += 1) {
             const key = keys[i];
             if (rule.includes(key)) {
-              // eslint-disable-next-line no-eval
               objs[key] = eval(key);
               break;
             } else {

@@ -217,7 +217,4 @@ const moment = (date) => {
   return new Moment(time);
 }
 
-console.log(moment().format('YYYY-MM-DD 星期W a h:m:s'));
-console.log(moment('2019-10-31 23:00:01').format('YYYY-MM-DD W AA h:m:s'));
-
-// export default moment;
+export default moment;

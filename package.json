@@ -1,6 +1,6 @@
 {
   "name": "js-moment",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "时间格式化及计算方法",
   "repository": "https://github.com/zhangjichengcc/moments",
   "private": false,
@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "test": "echo \"编译代码\" && webpack --config=webpack.config.ts",
+    "build": "echo \"编译&压缩代码\" && env MINIFY=1 webpack"
   },
   "files": [
     "/dist",
@@ -32,6 +33,7 @@
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^1.0.1",
     "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0"

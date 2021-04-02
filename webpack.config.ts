@@ -1,14 +1,16 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2021-04-01 17:49:08
+ * @LastEditTime: 2021-04-02 11:57:47
  * @LastEditors: zhangjicheng
  * @Description: 
- * @FilePath: \moments\webpack.config.js
+ * @FilePath: \moments\webpack.config.ts
  * 可以输入预定的版权声明、个性签名、空行等
  */
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
+
+const isMinify = process.env.MINIFY; // 获取是否压缩
 
 module.exports = {
   entry: './src/index.ts',
@@ -34,7 +36,7 @@ module.exports = {
     },
   },
   optimization: {
-    minimize: true,
+    minimize: !!isMinify,
     minimizer: [new TerserPlugin()],
   },
 };

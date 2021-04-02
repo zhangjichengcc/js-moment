@@ -1,10 +1,21 @@
-const moment = (date) => {
+/**
+ * 
+ * @param date 
+ */
+
+const moment = (date?: string | Date) => {
   const now = new Date();
-  const time = date ? new Date(date.replace(/-/g, '/')) : now;
+  const type: string = Object.prototype.toString.call(date);
+  const displayProps: {[key: string]: any} = {
+    '[object Date]': date,
+    /** 将 yyyy-mm-dd 转为 yyyy/mm/dd 处理ios new Date() 问题 */
+    '[object String]': typeof date === 'string' ? new Date((date as string).replace(/-/g, '/')) : '',
+    '[object Undefined]': now,
+  }
+  const time = displayProps[type as keyof typeof displayProps];
 
   /* 格式化规则 */
-  const formatRule = (d) => {
-    const dtime = d || new Date();
+  const formatRule = (dtime: Date) => {
 
     const _year = dtime.getFullYear();
     const _month = (dtime.getMonth() + 1);
@@ -13,7 +24,7 @@ const moment = (date) => {
     const _minutes = dtime.getMinutes();
     const _seconds = dtime.getSeconds();
     const _weeks = dtime.getDay();
-    const _quarter = parseInt((_month - 1)/3) + 1;
+    const _quarter = parseInt(((Number(_month) - 1) / 3).toString(), 10) + 1;
 
     return {
       // 年
@@ -52,14 +63,14 @@ const moment = (date) => {
       // 季度
       Q: ['一', '二', '三', '四'][_quarter],
       q: _quarter,
-    }
+    } as const;
   };
 
   // 默认格式
-  const defFormat = 'YYYY-MM-DD hh:mm:ss';
+  const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
 
   // 生成时间对象
-  const setDateObj = (newDate) => {
+  const setDateObj = (newDate: Date) => {
     const nd = newDate || new Date();
     return {
       year: nd.getFullYear(),
@@ -71,8 +82,13 @@ const moment = (date) => {
       week: nd.getDay(),
     }
   }
+
   class Moment{
-    constructor(propDate){
+    date: any;
+    dateObject: { year: any; month: any; day: any; hours: any; minutes: any; seconds: any; week: any; };
+    formatDate: string;
+    
+    constructor(propDate: Date){
       this.date = propDate;
       this.dateObject = setDateObj(propDate);
     }
@@ -80,16 +96,20 @@ const moment = (date) => {
     // 日期格式化
     format(format = defFormat) {
       let formatStr = format;
-      const formatObjs = formatRule(this.date)
+      const formatObjs: object = formatRule(this.date)
       const keys = Object.keys(formatObjs);
-      keys.forEach(key => {
-        formatStr = formatStr.replace(key, formatObjs[key]);
+      // function exChange<K extends keyof typeof formatObjs>(key: K) {
+      //   return formatObjs[key]
+      // }
+      keys.forEach((key: keyof typeof formatObjs) => {
+        const reg = new RegExp(key, 'g');
+        formatStr = formatStr.replace(reg, formatObjs[key]);
       })
       return this.formatDate = formatStr;
     }
 
     // 日期算法 时间加减 h/m/s
-    addTime(val = 0, type = 'h') {
+    addTime(val = 0, type = 'h'): any {
       if(!this.date) return false;
       const { year, month, day, hours, minutes, seconds } = this.dateObject; 
       const newDate = new Date(year, month, day, type === 'h' ? hours + val : hours, type === 'm' ? minutes + val : minutes, type === 's' ? seconds + val : seconds);
@@ -101,7 +121,7 @@ const moment = (date) => {
     // 日期算法 日期加减
     addDay(val = 0) {
       if(!this.date) return false;
-      const newDate = new Date(this.date.getTime()+val*24*60*60*1e3);
+      const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3);
       this.date = newDate;
       this.dateObject = setDateObj(newDate);
       return this;
@@ -143,7 +163,7 @@ const moment = (date) => {
 
     // 日期算法 相对时间
     // 注：每个月按30天处理
-    fromTo(t) {
+    fromTo(t: string | Date) {
       const { date: oldDate } = this;
       const { date: newDate } = moment(t);
       const getTimes = newDate.getTime() - oldDate.getTime();
@@ -166,16 +186,15 @@ const moment = (date) => {
       const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
       const total = { years, months, days, hours, minutes, seconds };
       // 格式化相对日期
-      const format = rule => {
+      const format = (rule: string) => {
         let str = '';
         if (rule) {
           str = rule;
-          const objs = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
+          const objs: {[key: string]: any} = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
           const keys = ['Y', 'M', 'D', 'h', 'm', 's'];
           for (let i = 0; i < keys.length; i += 1) {
             const key = keys[i];
             if (rule.includes(key)) {
-              // eslint-disable-next-line no-eval
               objs[key] = eval(key);
               break;
             } else {
@@ -217,4 +236,5 @@ const moment = (date) => {
   return new Moment(time);
 }
 
-export default moment;
+// export default moment;
+moment().addDay();

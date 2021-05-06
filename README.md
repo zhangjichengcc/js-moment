@@ -26,7 +26,7 @@
 ## 📦 安装
 
 ```bash
->  npm install --save-dev js-moment
+>  npm install --save js-moment
 ```
 
 ``` js

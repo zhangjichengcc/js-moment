@@ -236,5 +236,4 @@ const moment = (date?: string | Date) => {
   return new Moment(time);
 }
 
-// export default moment;
-moment().addDay();
+export default moment;

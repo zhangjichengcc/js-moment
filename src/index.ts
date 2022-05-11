@@ -3,16 +3,22 @@
  * @param date 
  */
 
-const moment = (date?: string | Date) => {
-  const now = new Date();
-  const type: string = Object.prototype.toString.call(date);
-  const displayProps: {[key: string]: any} = {
-    '[object Date]': date,
-    /** 将 yyyy-mm-dd 转为 yyyy/mm/dd 处理ios new Date() 问题 */
-    '[object String]': typeof date === 'string' ? new Date((date as string).replace(/-/g, '/')) : '',
-    '[object Undefined]': now,
+/**
+ * 装饰器-格式化输入
+ */
+function formatInput(date?: Date | string) {
+
+  // ? 将 yyyy-mm-dd 转为 yyyy/mm/dd 处理ios new Date() 问题
+  const _date: Date = typeof date === 'string' ? new Date((date as string).replace(/-/g, '/')) : new Date(date);
+  // ! 进行入参校验，若格式不正确则抛出错误
+  if (_date.toString() === 'Invalid Date') throw new Error('Incoming parameters Invalid Date');
+
+  return function(target: any) {
+    target.date = _date;
   }
-  const time = displayProps[type as keyof typeof displayProps];
+}
+
+const moment = (date?: string | Date) => {
 
   /* 格式化规则 */
   const formatRule = (dtime: Date) => {
@@ -83,7 +89,8 @@ const moment = (date?: string | Date) => {
     }
   }
 
-  class Moment{
+  @formatInput(date)
+  class Moment {
     date: any;
     dateObject: { year: any; month: any; day: any; hours: any; minutes: any; seconds: any; week: any; };
     formatDate: string;
@@ -233,7 +240,11 @@ const moment = (date?: string | Date) => {
       }
     }
   }
-  return new Moment(time);
+  return new Moment();
 }
 
-export default moment;
+// export default moment;
+
+moment()
+
+debugger

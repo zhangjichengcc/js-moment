@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2021-04-02 11:57:47
+ * @LastEditTime: 2022-05-11 16:33:02
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \moments\webpack.config.ts
@@ -18,7 +18,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },

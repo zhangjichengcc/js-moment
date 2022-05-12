@@ -6,19 +6,48 @@
 /**
  * 装饰器-格式化输入
  */
-function formatInput(date?: Date | string) {
-
+//  https://zhuanlan.zhihu.com/p/310167423
+function formatDateInput(target: any) {
+  debugger
+  // date = date || new Date;
+  const date = new Date();
   // ? 将 yyyy-mm-dd 转为 yyyy/mm/dd 处理ios new Date() 问题
   const _date: Date = typeof date === 'string' ? new Date((date as string).replace(/-/g, '/')) : new Date(date);
   // ! 进行入参校验，若格式不正确则抛出错误
   if (_date.toString() === 'Invalid Date') throw new Error('Incoming parameters Invalid Date');
 
-  return function(target: any) {
-    target.date = _date;
+  target.constructor = function(data: any) {
+    data = 
+  }
+
+  // return function(target: any, _value: any, discriptor: any) {
+  //   debugger
+  //   target.prototype.date = _date;
+  //   target.prototype.dateObject = new DateObject(_date);
+  // }
+}
+
+class DateObject {
+  year: number;
+  month: number;
+  day: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  week: number;
+
+  constructor(date: Date) {
+    this.year = date.getFullYear(),
+    this.month = date.getMonth(),
+    this.day = date.getDate(),
+    this.hours = date.getHours(),
+    this.minutes = date.getMinutes(),
+    this.seconds = date.getSeconds(),
+    this.week = date.getDay()
   }
 }
 
-const moment = (date?: string | Date) => {
+function moment(date?: string | Date) {
 
   /* 格式化规则 */
   const formatRule = (dtime: Date) => {
@@ -75,29 +104,14 @@ const moment = (date?: string | Date) => {
   // 默认格式
   const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
 
-  // 生成时间对象
-  const setDateObj = (newDate: Date) => {
-    const nd = newDate || new Date();
-    return {
-      year: nd.getFullYear(),
-      month: nd.getMonth(),
-      day: nd.getDate(),
-      hours: nd.getHours(),
-      minutes: nd.getMinutes(),
-      seconds: nd.getSeconds(),
-      week: nd.getDay(),
-    }
-  }
-
-  @formatInput(date)
+  @formatDateInput
   class Moment {
     date: any;
-    dateObject: { year: any; month: any; day: any; hours: any; minutes: any; seconds: any; week: any; };
+    dateObject: DateObject;
     formatDate: string;
     
-    constructor(propDate: Date){
-      this.date = propDate;
-      this.dateObject = setDateObj(propDate);
+    constructor(date: any) {
+      
     }
     
     // 日期格式化
@@ -121,7 +135,7 @@ const moment = (date?: string | Date) => {
       const { year, month, day, hours, minutes, seconds } = this.dateObject; 
       const newDate = new Date(year, month, day, type === 'h' ? hours + val : hours, type === 'm' ? minutes + val : minutes, type === 's' ? seconds + val : seconds);
       this.date = newDate;
-      this.dateObject = setDateObj(newDate);
+      this.dateObject = new DateObject(newDate);
       return this;
     }
 
@@ -130,7 +144,7 @@ const moment = (date?: string | Date) => {
       if(!this.date) return false;
       const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3);
       this.date = newDate;
-      this.dateObject = setDateObj(newDate);
+      this.dateObject = new DateObject(newDate);
       return this;
     }
 
@@ -139,7 +153,7 @@ const moment = (date?: string | Date) => {
       if(!this.date) return false;
       const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3 * 7);
       this.date = newDate;
-      this.dateObject = setDateObj(newDate);
+      this.dateObject = new DateObject(newDate);
       return this;
     }
 
@@ -149,7 +163,7 @@ const moment = (date?: string | Date) => {
       const { year, month, day, hours, minutes, seconds } = this.dateObject; 
       const newDate = new Date(year, month + val, day, hours, minutes, seconds);
       this.date = newDate;
-      this.dateObject = setDateObj(newDate);
+      this.dateObject = new DateObject(newDate);
       return this;
     }
 
@@ -159,7 +173,7 @@ const moment = (date?: string | Date) => {
       const { year, month, day, hours, minutes, seconds } = this.dateObject; 
       const newDate = new Date(year + val, month, day, hours, minutes, seconds);
       this.date = newDate;
-      this.dateObject = setDateObj(newDate);
+      this.dateObject = new DateObject(newDate);
       return this;
     }
 
@@ -240,7 +254,7 @@ const moment = (date?: string | Date) => {
       }
     }
   }
-  return new Moment();
+  return new Moment(date);
 }
 
 // export default moment;

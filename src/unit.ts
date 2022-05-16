@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:39:46
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-13 18:54:29
+ * @LastEditTime: 2022-05-16 19:00:41
  * @FilePath: \moments\src\unit.ts
  */
 
@@ -23,6 +23,7 @@ class DateObject {
   hours: number;
   minutes: number;
   seconds: number;
+  time: number;
   week: number;
 
   constructor(date: Date) {
@@ -32,6 +33,7 @@ class DateObject {
     this.hours = date.getHours(),
     this.minutes = date.getMinutes(),
     this.seconds = date.getSeconds(),
+    this.time = date.getTime(),
     this.week = date.getDay()
   }
 }
@@ -40,33 +42,38 @@ class DateObject {
  * 日期对象类
  */
 class Moment {
-  date: any;
+  date: Date;
   dateObject: DateObject;
-  formatDate: string;
   
   constructor(date: Date) {
     this.date = date;
     this.dateObject = new DateObject(date);
   }
   
-  // 日期格式化
-  format(format = defFormat) {
+  /**
+   * 日期格式化
+   * @param: string, default 'YYYY-MM-DD hh:mm:ss'
+   * @returns string
+   */
+  format(format = defFormat): string {
     let formatStr = format;
     const formatObjs: object = formatRule(this.date)
     const keys = Object.keys(formatObjs);
-    // function exChange<K extends keyof typeof formatObjs>(key: K) {
-    //   return formatObjs[key]
-    // }
     keys.forEach((key: keyof typeof formatObjs) => {
       const reg = new RegExp(key, 'g');
       formatStr = formatStr.replace(reg, formatObjs[key]);
     })
-    return this.formatDate = formatStr;
+    return formatStr;
   }
 
-  // 日期算法 时间加减 h/m/s
-  addTime(val = 0, type = 'h'): any {
-    if(!this.date) return false;
+  /**
+  * 日期算法 时间加减
+  * @param val: number 
+  * @param type: 'h' | 'm' | 's'
+  * @returns Moment
+  */
+  addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
+    type = type || 'h';
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
     const newDate = new Date(year, month, day, type === 'h' ? hours + val : hours, type === 'm' ? minutes + val : minutes, type === 's' ? seconds + val : seconds);
     this.date = newDate;
@@ -74,27 +81,36 @@ class Moment {
     return this;
   }
 
-  // 日期算法 日期加减
-  addDay(val = 0) {
-    if(!this.date) return false;
+  /**
+   * 日期算法 日期加减
+   * @param val : number
+   * @returns : Moment
+   */
+  addDay(val: number = 0): Moment {
     const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3);
     this.date = newDate;
     this.dateObject = new DateObject(newDate);
     return this;
   }
 
-  // 日期算法 星期加减
-  addWeek(val = 0) {
-    if(!this.date) return false;
+  /**
+   * 日期算法 星期加减
+   * @param val : number
+   * @returns : Moment
+   */
+  addWeek(val: number = 0): Moment {
     const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3 * 7);
     this.date = newDate;
     this.dateObject = new DateObject(newDate);
     return this;
   }
 
-  // 日期算法 月份加减
-  addMonth(val = 0) {
-    if(!this.date) return false;
+  /**
+   * 日期算法 月份加减
+   * @param val : number
+   * @returns : Moment
+   */
+  addMonth(val: number = 0): Moment {
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
     const newDate = new Date(year, month + val, day, hours, minutes, seconds);
     this.date = newDate;
@@ -102,9 +118,12 @@ class Moment {
     return this;
   }
 
-  // 日期算法 年份加减
-  addYear(val = 0) {
-    if(!this.date) return false;
+  /**
+   * 日期算法 年份加减
+   * @param val : number
+   * @returns : Moment
+   */
+  addYear(val: number = 0): Moment {
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
     const newDate = new Date(year + val, month, day, hours, minutes, seconds);
     this.date = newDate;
@@ -112,37 +131,88 @@ class Moment {
     return this;
   }
 
-  // 获得时间戳
-  getTime() {
+  /**
+   * 获取时间戳
+   * @returns number
+   */
+  getTime(): number {
     return this.date.getTime();
   }
 
-  // 日期算法 相对时间
-  // 注：每个月按30天处理
-  fromTo(t: string | Date) {
-    const { date: oldDate } = this;
-    const { date: newDate } = moment(t);
-    const getTimes = newDate.getTime() - oldDate.getTime();
-    const tag = getTimes >= 0 ? '+' : '-';
-    const ms = Math.abs(getTimes);
-    // 总计数
-    const Y = Math.floor(ms / (1000 * 60 * 60 * 24 * 30 * 12));
-    const M = Math.floor(ms / (1000 * 60 * 60 * 24 * 30));
-    const D = Math.floor(ms / (1000 * 60 * 60 * 24));
-    const h = Math.floor(ms / (1000 * 60 * 60));
-    const m = Math.floor(ms / (1000 * 60));
-    const s = Math.floor(ms / 1000);
+  // !注：每个月按30天处理
+  /**
+   * 获取相对时间
+   * @param date: string | Date 
+   * @returns 
+   */
+   fromTo(date: string | Date) {
+    const { dateObject: oldDate } = this;
+    const { dateObject: newDate } = moment(date);
+    const diffTime = newDate.time - oldDate.time;
+    // 日期标志
+    const tag = diffTime >= 0 ? '+' : '-';
+    // 相对时间（ms）
+    const ms = Math.abs(diffTime);
+    // 
+    const standardYear = moment(new Date(0, 0, 1, 0, 0, 0)).dateObject.year;
+    let diffDate = moment(tag === '+' ? 
+      new Date(newDate.year - oldDate.year, newDate.month - oldDate.month, newDate.day - oldDate.day, newDate.hours - oldDate.hours, newDate.minutes - oldDate.minutes, newDate.seconds - oldDate.seconds) :
+      new Date(oldDate.year - newDate.year, oldDate.month - newDate.month, oldDate.day - newDate.day, oldDate.hours - newDate.hours, oldDate.minutes - newDate.minutes, oldDate.seconds - newDate.seconds)
+    ).dateObject;
+    
     // 分别包括数
-    const years = Y;
-    const months = M - Y * 12;
-    const days = D - M * 30;
-    const hours = h - D * 24;
-    const minutes = m - h * 60;
-    const seconds = s - m * 60;
-    const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
+    const years = diffDate.year - standardYear;
+    const months = diffDate.month;
+    const days = diffDate.day;
+    const hours = diffDate.hours;
+    const minutes = diffDate.minutes;
+    const seconds = diffDate.seconds;
+
+    // 总计数
+    const times = {
+      years,
+      months: years * 12 + months,
+      days: Math.floor(ms / (1000 * 60 * 60 * 24)),
+      hours: Math.floor(ms / (1000 * 60 * 60)),
+      minutes: Math.floor(ms / (1000 * 60)),
+      seconds: Math.floor(ms / 1000),
+    };
+    // 分别包含
     const total = { years, months, days, hours, minutes, seconds };
-    // 格式化相对日期
-    const format = (rule: string) => {
+
+  // fromTo(date: string | Date) {
+  //   const { dateObject: oldDate } = this;
+  //   const { dateObject: newDate } = moment(date);
+  //   const diffTime = newDate.time - oldDate.time;
+  //   // 日期标志
+  //   const tag = diffTime >= 0 ? '+' : '-';
+  //   // 相对时间（ms）
+  //   const ms = Math.abs(getTimes);
+  //   // 
+  //   const diffMonth = (newDate.year - oldDate.year) * 12 + (newDate.month - oldDate.month)
+  //   // 总计数
+  //   const Y = Math.floor(ms / (1000 * 60 * 60 * 24 * 30 * 12));
+  //   const M = Math.floor(ms / (1000 * 60 * 60 * 24 * 30));
+  //   const D = Math.floor(ms / (1000 * 60 * 60 * 24));
+  //   const h = Math.floor(ms / (1000 * 60 * 60));
+  //   const m = Math.floor(ms / (1000 * 60));
+  //   const s = Math.floor(ms / 1000);
+  //   // 分别包括数
+  //   const years = Y;
+  //   const months = M - Y * 12;
+  //   const days = D - M * 30;
+  //   const hours = h - D * 24;
+  //   const minutes = m - h * 60;
+  //   const seconds = s - m * 60;
+    // const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
+    // const total = { years, months, days, hours, minutes, seconds };
+ 
+    /**
+     * 格式化相对日期
+     * @param rule: string 
+     * @returns 
+     */
+    function format(rule: string) {
       let str = '';
       if (rule) {
         str = rule;
@@ -175,6 +245,7 @@ class Moment {
       }
       return str;
     }
+    
     return {
       times,
       total,

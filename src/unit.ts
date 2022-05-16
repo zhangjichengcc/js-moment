@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:39:46
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-16 19:00:41
- * @FilePath: \moments\src\unit.ts
+ * @LastEditTime: 2022-05-17 00:18:01
+ * @FilePath: /js-moment/src/unit.ts
  */
 
 import { formatRule } from './format';
@@ -151,9 +151,9 @@ class Moment {
     const diffTime = newDate.time - oldDate.time;
     // 日期标志
     const tag = diffTime >= 0 ? '+' : '-';
-    // 相对时间（ms）
+    // 相对时间（时间戳 ms）
     const ms = Math.abs(diffTime);
-    // 
+    // ? 标准年，以 new Date(0,0,0) 为基准
     const standardYear = moment(new Date(0, 0, 1, 0, 0, 0)).dateObject.year;
     let diffDate = moment(tag === '+' ? 
       new Date(newDate.year - oldDate.year, newDate.month - oldDate.month, newDate.day - oldDate.day, newDate.hours - oldDate.hours, newDate.minutes - oldDate.minutes, newDate.seconds - oldDate.seconds) :
@@ -179,34 +179,8 @@ class Moment {
     };
     // 分别包含
     const total = { years, months, days, hours, minutes, seconds };
-
-  // fromTo(date: string | Date) {
-  //   const { dateObject: oldDate } = this;
-  //   const { dateObject: newDate } = moment(date);
-  //   const diffTime = newDate.time - oldDate.time;
-  //   // 日期标志
-  //   const tag = diffTime >= 0 ? '+' : '-';
-  //   // 相对时间（ms）
-  //   const ms = Math.abs(getTimes);
-  //   // 
-  //   const diffMonth = (newDate.year - oldDate.year) * 12 + (newDate.month - oldDate.month)
-  //   // 总计数
-  //   const Y = Math.floor(ms / (1000 * 60 * 60 * 24 * 30 * 12));
-  //   const M = Math.floor(ms / (1000 * 60 * 60 * 24 * 30));
-  //   const D = Math.floor(ms / (1000 * 60 * 60 * 24));
-  //   const h = Math.floor(ms / (1000 * 60 * 60));
-  //   const m = Math.floor(ms / (1000 * 60));
-  //   const s = Math.floor(ms / 1000);
-  //   // 分别包括数
-  //   const years = Y;
-  //   const months = M - Y * 12;
-  //   const days = D - M * 30;
-  //   const hours = h - D * 24;
-  //   const minutes = m - h * 60;
-  //   const seconds = s - m * 60;
-    // const times = { years: Y, months: M, days: D, hours: h, minutes: m, seconds: s };
-    // const total = { years, months, days, hours, minutes, seconds };
  
+    type formatStrParams = 'Y' | 'M' | 'D' | 'h' | 'm' | 's';
     /**
      * 格式化相对日期
      * @param rule: string 
@@ -216,8 +190,8 @@ class Moment {
       let str = '';
       if (rule) {
         str = rule;
-        const objs: {[key: string]: any} = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
-        const keys = ['Y', 'M', 'D', 'h', 'm', 's'];
+        const objs: {[key in formatStrParams]: number} = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
+        const keys: formatStrParams[] = ['Y', 'M', 'D', 'h', 'm', 's'];
         for (let i = 0; i < keys.length; i += 1) {
           const key = keys[i];
           if (rule.includes(key)) {
@@ -227,8 +201,8 @@ class Moment {
             objs[key] = null;
           }
         }
-        Object.keys(objs).forEach(key => {
-          str = str.replace(key, objs[key])
+        Object.keys(objs).forEach((key: formatStrParams) => {
+          str = str.replace(key, String(objs[key]));
         })
       } else if (years) {
         str = `${years}年${months ? `${months}个月` : ''}${tag === '+' ? '后':'前'}`;

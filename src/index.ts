@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 11:54:31
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-17 19:05:00
+ * @LastEditTime: 2022-05-17 19:10:17
  * @FilePath: \moments\src\index.ts
  */
 // @ts-nocheck
@@ -16,4 +16,5 @@ function moment(date?: string | Date) {
 
 export default moment;
 
+// 28 29
 moment('2022-10-10 12:00:00').fromTo('2022-9-12 1:10:10');

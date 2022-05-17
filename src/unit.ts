@@ -2,12 +2,13 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:39:46
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-17 00:18:01
- * @FilePath: /js-moment/src/unit.ts
+ * @LastEditTime: 2022-05-17 19:01:16
+ * @FilePath: \moments\src\unit.ts
  */
 
-import { formatRule } from './format';
-import moment from './index';
+// @ts-nocheck
+import { formatRule } from './format.ts';
+import moment from './index.ts';
 
 // 默认格式
 const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
@@ -153,20 +154,31 @@ class Moment {
     const tag = diffTime >= 0 ? '+' : '-';
     // 相对时间（时间戳 ms）
     const ms = Math.abs(diffTime);
+    const [maxDate, minDate] = tag === '+' ? [newDate, oldDate] : [oldDate, newDate];
     // ? 标准年，以 new Date(0,0,0) 为基准
-    const standardYear = moment(new Date(0, 0, 1, 0, 0, 0)).dateObject.year;
-    let diffDate = moment(tag === '+' ? 
-      new Date(newDate.year - oldDate.year, newDate.month - oldDate.month, newDate.day - oldDate.day, newDate.hours - oldDate.hours, newDate.minutes - oldDate.minutes, newDate.seconds - oldDate.seconds) :
-      new Date(oldDate.year - newDate.year, oldDate.month - newDate.month, oldDate.day - newDate.day, oldDate.hours - newDate.hours, oldDate.minutes - newDate.minutes, oldDate.seconds - newDate.seconds)
+    const standardDate = moment(new Date(0, 0, 1, 0, 0, 0)).dateObject;
+
+
+    let diffDate = moment(
+      new Date(maxDate.year - minDate.year, maxDate.month - minDate.month, maxDate.day - minDate.day + 1, maxDate.hours - minDate.hours, maxDate.minutes - minDate.minutes, maxDate.seconds - minDate.seconds)
     ).dateObject;
+
+    // const diffDate = {
+    //   years   : maxDate.years - minDate.years,
+    //   months  : maxDate.months - minDate.months,
+    //   days    : maxDate.days - minDate.days,
+    //   hours   : maxDate.hours - minDate.hours,
+    //   minutes : maxDate.minutes - minDate.minutes,
+    //   seconds : maxDate.seconds - minDate.seconds
+    // }
     
     // 分别包括数
-    const years = diffDate.year - standardYear;
-    const months = diffDate.month;
-    const days = diffDate.day;
-    const hours = diffDate.hours;
-    const minutes = diffDate.minutes;
-    const seconds = diffDate.seconds;
+    const years = diffDate.year - standardDate.year;
+    const months = diffDate.month - standardDate.month;
+    const days = diffDate.day - standardDate.day;
+    const hours = diffDate.hours - standardDate.hours;
+    const minutes = diffDate.minutes - standardDate.minutes;
+    const seconds = diffDate.seconds - standardDate.seconds;
 
     // 总计数
     const times = {
@@ -190,32 +202,22 @@ class Moment {
       let str = '';
       if (rule) {
         str = rule;
-        const objs: {[key in formatStrParams]: number} = { Y: years, M: months, D: days, h: hours, m: minutes, s: seconds };
-        const keys: formatStrParams[] = ['Y', 'M', 'D', 'h', 'm', 's'];
-        for (let i = 0; i < keys.length; i += 1) {
-          const key = keys[i];
-          if (rule.includes(key)) {
-            objs[key] = eval(key);
-            break;
-          } else {
-            objs[key] = null;
-          }
-        }
+        const objs: {[key in formatStrParams]: number} = { 
+          Y: years, M: months, D: days, h: hours, m: minutes, s: seconds
+        };
         Object.keys(objs).forEach((key: formatStrParams) => {
           str = str.replace(key, String(objs[key]));
         })
-      } else if (years) {
-        str = `${years}年${months ? `${months}个月` : ''}${tag === '+' ? '后':'前'}`;
-      } else if (months) {
-        str = `${months}个月${days ? `${days}天` : ''}${tag === '+' ? '后':'前'}`;
-      } else if (days) {
-        str = `${days}天${hours ? `${hours}小时` : ''}${tag === '+' ? '后':'前'}`;
-      } else if (hours) {
-        str = `${hours}小时${minutes ? `${minutes}分钟` : ''}${tag === '+' ? '后':'前'}`;
-      } else if (minutes) {
-        str = `${minutes}分钟${seconds ? `${seconds}秒` : ''}${tag === '+' ? '后':'前'}`;
       } else {
-        str = `${seconds}秒${tag === '+' ? '后':'前'}`;
+        str = `
+          ${years ? `${years}年` : ''}
+          ${years || months ? `${months}个月` : ''}
+          ${!years && months || days ? `${days}天` : ''}
+          ${!years && !months && days || hours ? `${hours}小时` : ''}
+          ${!years && !months && !days && hours || minutes ? `${minutes}分钟` : ''}
+          ${!years && !months && !days && !hours && minutes || seconds ? `${seconds}秒` : ''}
+          ${tag === '+' ? '后' : '前'}
+        `
       }
       return str;
     }

@@ -5,28 +5,39 @@
   "version": "0.2.0",
   "configurations": [  
     {
-      "name": "Current TS File",
+      "name": "Debugging js-moment",
       "type": "node",
       "request": "launch",
-      // "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
       "args": [
-        "${relativeFile}"
-        // "${workspaceRoot}/src/index.ts"
+        "${workspaceRoot}/src/index.ts"
       ],
       "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register"
+        "--loader",
+        "ts-node/esm"
       ],
       "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
       "sourceMaps": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen" 
-      // "name": "Launch Chrome against localhost",
-      // "url": "http://localhost:8900",
-      // // "webRoot": "${workspaceFolder}"
-      // "webRoot": "${workspaceFolder}/src/index.ts"
+    },
+    {
+      "name": "Current TS File",
+      "type": "node",
+      "request": "launch",
+      "args": [
+        "${relativeFile}"
+      ],
+      "runtimeArgs": [
+        "--loader",
+        "--nolazy",
+        "--trace-warnings",
+        "ts-node/esm",
+      //   "-r",
+      //   "ts-node/register"
+      ],
+      "cwd": "${workspaceRoot}",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen" 
     }
   ]
 }

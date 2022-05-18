@@ -2,12 +2,15 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-16 14:36:42
+ * @LastEditTime: 2022-05-18 18:37:59
  * @FilePath: \moments\src\format.ts
  */
 
+// 默认格式
+const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
+
 /**
- * 格式化日期
+ * 格式化日期规则
  * @param date 
  * @returns 
  */
@@ -63,6 +66,22 @@ function formatRule(date: Date) {
   } as const;
 };
 
+/**
+ * 格式化日期方法
+ * @param format: string
+ * @returns: string
+ */
+function format(format = defFormat): string {
+  let formatStr = format;
+  const formatObjs: object = formatRule(this.date)
+  const keys = Object.keys(formatObjs);
+  keys.forEach((key: keyof typeof formatObjs) => {
+    const reg = new RegExp(key, 'g');
+    formatStr = formatStr.replace(reg, formatObjs[key]);
+  })
+  return formatStr;
+}
+
 export {
-  formatRule,
+  format,
 }

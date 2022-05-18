@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2021-04-01 17:43:16
- * @LastEditTime: 2022-05-11 18:01:13
+ * @LastEditTime: 2022-05-18 18:19:36
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \moments\tsconfig.json
@@ -13,12 +13,17 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
-    "target": "es5",
+    "target": "ESNext",
     "sourceMap": true, // 调试 ts 源码  
     "allowJs": true,
     "experimentalDecorators": true,
+    "esModuleInterop":true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@class/*": ["./src/class/*"],
+    }
   },
   "include": [
-    "src/**/*"
+    "./src"
   ]
 }

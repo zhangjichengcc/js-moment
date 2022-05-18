@@ -30,10 +30,7 @@
       "runtimeArgs": [
         "--loader",
         "--nolazy",
-        "--trace-warnings",
         "ts-node/esm",
-      //   "-r",
-      //   "ts-node/register"
       ],
       "cwd": "${workspaceRoot}",
       "sourceMaps": true,

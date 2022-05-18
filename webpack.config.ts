@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2022-05-11 16:33:02
+ * @LastEditTime: 2022-05-18 18:20:24
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \moments\webpack.config.ts
@@ -26,6 +26,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      "@class": path.resolve(__dirname, "src/class"),
+    },
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

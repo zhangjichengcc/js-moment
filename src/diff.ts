@@ -1,4 +1,4 @@
-import Moment from '@class/Moment';
+import Moment from './class/Moment.js';
 
 /**
  * 获取相对时间

@@ -217,4 +217,4 @@
 
 > 
 
-
+ts-node-esm ./src/index.ts

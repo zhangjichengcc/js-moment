@@ -25,6 +25,7 @@
   },
   "files": [
     "/dist",
+    "/src",
     "moment.d.ts",
     "/README.md",
     "/README-en.md"

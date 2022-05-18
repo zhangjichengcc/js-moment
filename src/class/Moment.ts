@@ -1,7 +1,7 @@
-import moment from "@/index";
-import DateObject from '@class/DateObject';
-import { format } from '@/format';
-import { fromTo } from '@/diff';
+import moment from "../index.js";
+import DateObject from '../class/DateObject.js';
+import { format } from '../format.js';
+import { fromTo } from '../diff.js';
 
 
 // 默认格式
@@ -81,7 +81,8 @@ class Moment {
    * @returns : Moment
    */
   addMonth(val: number = 0): Moment {
-    const { year, month, day, hours, minutes, seconds } = this.dateObject; 
+    let { year, month, day, hours, minutes, seconds } = this.dateObject; 
+    month -= 1; // * Date 对象的 month 为 0-11，此处需做-1处理
     const newDate = new Date(year, month + val, day, hours, minutes, seconds);
     this.date = newDate;
     this.dateObject = new DateObject(newDate);

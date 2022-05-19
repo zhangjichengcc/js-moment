@@ -2,9 +2,12 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-18 18:37:59
+ * @LastEditTime: 2022-05-19 19:09:52
  * @FilePath: \moments\src\format.ts
  */
+
+import { localeProps } from './locale.js';
+import Formatter from './class/Formatter.js';
 
 // 默认格式
 const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
@@ -16,15 +19,14 @@ const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
  */
 function formatRule(date: Date) {
 
-  const _year      =   date.getFullYear().toString();
-  const _month     =   (date.getMonth() + 1).toString();
-  const _day       =   date.getDate().toString();
-  const _hours     =   date.getHours().toString();
-  const _minutes   =   date.getMinutes().toString();
-  const _seconds   =   date.getSeconds().toString();
-  const _weeks     =   date.getDay().toString();
-  // const _quarter   =   parseInt(((Number(_month) - 1) / 3).toString(), 10) + 1;
-  const _quarter   =   Math.ceil(Number(_month) / 3).toString();
+  const _year    = date.getFullYear().toString();
+  const _month   = (date.getMonth() + 1).toString();
+  const _day     = date.getDate().toString();
+  const _hours   = date.getHours().toString();
+  const _minutes = date.getMinutes().toString();
+  const _seconds = date.getSeconds().toString();
+  const _weeks   = date.getDay().toString();
+  const _quarter = Math.ceil(Number(_month) / 3).toString();
 
   return {
     // 年
@@ -45,8 +47,8 @@ function formatRule(date: Date) {
     // 时
     HH    : _hours.padStart(2, '0'),
     H     : _hours,
-    hh    : String((Number(_hours)-1) / 12 + 1).padStart(2, '0'),
-    h     : String((Number(_hours)-1) / 12 + 1),
+    hh    : _hours.padStart(2, '0'),
+    h     : _hours,
     // 分
     mm    : _minutes.toString().padStart(2, '0'),
     m     : _minutes.toString(),
@@ -71,13 +73,14 @@ function formatRule(date: Date) {
  * @param format: string
  * @returns: string
  */
-function format(format = defFormat): string {
+function format(format = defFormat, locale: localeProps): string {
   let formatStr = format;
-  const formatObjs: object = formatRule(this.date)
-  const keys = Object.keys(formatObjs);
-  keys.forEach((key: keyof typeof formatObjs) => {
+  const formatter = new Formatter(this, locale)
+  const keys = Object.keys(formatter);
+  keys.forEach((key: keyof typeof formatter) => {
     const reg = new RegExp(key, 'g');
-    formatStr = formatStr.replace(reg, formatObjs[key]);
+    // @ts-ignore
+    formatStr = formatStr.replace(reg, formatter[key]);
   })
   return formatStr;
 }

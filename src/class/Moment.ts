@@ -1,7 +1,8 @@
 import moment from "../index.js";
 import DateObject from '../class/DateObject.js';
 import { format } from '../format.js';
-import { fromTo } from '../diff.js';
+import { diff } from '../diff.js';
+import { localeProps } from '../locale.js';
 
 
 // 默认格式
@@ -32,8 +33,9 @@ class Moment {
    * @param: string, default 'YYYY-MM-DD hh:mm:ss'
    * @returns string
    */
-  format(str: string): string {
-    return format(str);
+  format(str?: string, locale?: localeProps): string {
+    locale = locale || 'zh'; // 默认为中文
+    return format.call(this, str);
   }
 
   /**
@@ -122,13 +124,13 @@ class Moment {
 
   /**
    * 获取相对时间
-   * @param date: string | Date 
+   * @param date: string | Date | undefined
    * @returns 
    */
-  fromTo(date: string | Date) {
+  fromTo(date?: string | Date) {
     const begin = this, 
       end = moment(date);
-    return fromTo(begin, end);
+    return diff(begin, end);
   }
 }
 

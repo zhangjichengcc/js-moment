@@ -6,7 +6,7 @@ import Moment from './class/Moment.js';
  * @param end: Moment
  * @returns 
 */
-function fromTo(begin: Moment, end: Moment) {
+function diff(begin: Moment, end: Moment) {
   const
     absDiffMs = Math.abs(end.dateObject.time - begin.dateObject.time),
     tag = end.dateObject.time - begin.dateObject.time > 0 ? '+' : '-',
@@ -105,5 +105,5 @@ function fromTo(begin: Moment, end: Moment) {
 }
 
 export {
-  fromTo,
+  diff,
 }

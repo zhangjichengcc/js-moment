@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-19 10:14:19
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-19 19:07:04
- * @FilePath: \moments\src\class\Formatter.ts
+ * @LastEditTime: 2022-05-19 23:49:10
+ * @FilePath: /js-moment/src/class/Formatter.ts
  */
 
 import Moment from './Moment.js';

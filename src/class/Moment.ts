@@ -35,7 +35,7 @@ class Moment {
    */
   format(str?: string, locale?: localeProps): string {
     locale = locale || 'zh'; // 默认为中文
-    return format.call(this, str);
+    return format.call(this, str, locale);
   }
 
   /**

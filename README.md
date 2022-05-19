@@ -43,7 +43,7 @@
 |属性名|说明|
 |--|--|
 |date|标准 Date对象|
-|dateObject| 包含年(year), 月(month), 日(day), 时(hours), 分(minutes), 秒(seconds)的对象集合,**注意：month 的值为（0 - 11）*|
+|dateObject| 包含年(year), 月(month), 日(day), 时(hours), 分(minutes), 秒(seconds)的对象集合,**注意：month 的值为（0 - 11）**|
 
 ### 方法
 

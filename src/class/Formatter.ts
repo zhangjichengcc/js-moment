@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-19 10:14:19
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-19 23:49:10
- * @FilePath: /js-moment/src/class/Formatter.ts
+ * @LastEditTime: 2022-05-20 18:48:25
+ * @FilePath: \moments\src\class\Formatter.ts
  */
 
 import Moment from './Moment.js';
@@ -59,14 +59,14 @@ class Formatter extends Object {
 
     const _locale = locale[lang];
 
-    const _year    = year.toString();
-    const _month   = month.toString();
-    const _day     = day.toString();
-    const _hours   = hours.toString();
-    const _minutes = minutes.toString();
-    const _seconds = seconds.toString();
-    const _weeks   = week.toString();
-    const _quarter = quarter.toString();
+    const _year    = String(year);
+    const _month   = String(month + 1);
+    const _day     = String(day);
+    const _hours   = String(hours);
+    const _minutes = String(minutes);
+    const _seconds = String(seconds);
+    const _weeks   = String(week);
+    const _quarter = String(quarter + 1);
 
     // 年
     this.YYYY  = _year,
@@ -83,9 +83,9 @@ class Formatter extends Object {
     this.M     = _month,
 
     // 日
-    this.DD    = _day.padStart(2, '0'),
+    this.DD    = _locale.days[day],
     this.dd    = _day.padStart(2, '0'),
-    this.D     = _day,
+    this.D     = _locale.daysShort[day],
     this.d     = _day,
 
     // 时
@@ -114,7 +114,7 @@ class Formatter extends Object {
     this.a     = Number(_hours) < 12 ? 'am' : 'pm',
 
     // 季度
-    this.Q     = ['一', '二', '三', '四'][Number(_quarter)],
+    this.Q     = ['一', '二', '三', '四'][quarter],
     this.q     = _quarter
   }
 }

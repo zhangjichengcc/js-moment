@@ -39,69 +39,85 @@ class Moment {
   }
 
   /**
-  * 日期算法 时间加减
+  * 日期算法
   * @param val: number 
-  * @param type: 'h' | 'm' | 's'
+  * @param type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
   * @returns Moment
   */
-  addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
-    type = type || 'h';
+  add(val: number = 0, type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): Moment {
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
-    const newDate = new Date(year, month, day, type === 'h' ? hours + val : hours, type === 'm' ? minutes + val : minutes, type === 's' ? seconds + val : seconds);
+    const newDate = new Date(
+      type === 'year' ? year + val : year,
+      type === 'month' ? month + val : month,
+      type === 'day' ? day + val : day,
+      type === 'hour' ? hours + val : hours,
+      type === 'minute' ? minutes + val : minutes,
+      type === 'second' ? seconds + val : seconds,
+    );
     this.date = newDate;
     this.dateObject = new DateObject(newDate);
     return this;
   }
+  
+  /**
+   * 日期加减
+   * @param val number
+   * @param type 'y' | 'm' | 'd' 默认为 'd'
+   * @returns Moment
+   */
+  addDate(val: number = 0, type?: 'y' | 'm' | 'd'): Moment {
+    type = type || 'd';
+    const trans = {y: 'year', m: 'month', d: 'day'} as const;
+    return this.add(val, trans[type]);
+  }
 
   /**
-   * 日期算法 日期加减
+   * 时间加减
+   * @param val number
+   * @param type 'h' | 'm' | 's'
+   * @returns 
+   */
+  addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
+    type = type || 'h';
+    const trans = {h: 'hour', m: 'minute', s: 'second'} as const;
+    return this.add(val, trans[type]);
+  }
+
+  /**
+   * 日期算法 日加减
    * @param val : number
    * @returns : Moment
    */
   addDay(val: number = 0): Moment {
-    const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3);
-    this.date = newDate;
-    this.dateObject = new DateObject(newDate);
-    return this;
+    return this.add(val, 'day');
   }
 
   /**
-   * 日期算法 星期加减
+   * 日期算法 周加减
    * @param val : number
    * @returns : Moment
    */
   addWeek(val: number = 0): Moment {
-    const newDate = new Date(this.date.getTime() + val * 24 * 60 * 60 * 1e3 * 7);
-    this.date = newDate;
-    this.dateObject = new DateObject(newDate);
-    return this;
+    const days = val * 7;
+    return this.add(days, 'day');
   }
 
   /**
-   * 日期算法 月份加减
+   * 日期算法 月加减
    * @param val : number
    * @returns : Moment
    */
   addMonth(val: number = 0): Moment {
-    let { year, month, day, hours, minutes, seconds } = this.dateObject; 
-    month -= 1; // * Date 对象的 month 为 0-11，此处需做-1处理
-    const newDate = new Date(year, month + val, day, hours, minutes, seconds);
-    this.date = newDate;
-    this.dateObject = new DateObject(newDate);
-    return this;
+    return this.add(val, 'month');
   }
 
   /**
-   * 日期算法 年份加减
+   * 日期算法 年加减
    * @param val : number
    * @returns : Moment
    */
   addYear(val: number = 0): Moment {
-    const { year, month, day, hours, minutes, seconds } = this.dateObject; 
-    const newDate = new Date(year + val, month, day, hours, minutes, seconds);
-    this.date = newDate;
-    this.dateObject = new DateObject(newDate);
-    return this;
+    return this.add(val, 'year');
   }
 
   /**
@@ -114,7 +130,6 @@ class Moment {
 
   /**
    * 获取当前月天数
-   * @param date 
    * @returns number
    */
   getDays(): number {
@@ -125,7 +140,7 @@ class Moment {
   /**
    * 获取相对时间
    * @param date: string | Date | undefined
-   * @returns 
+   * @returns string
    */
   fromTo(date?: string | Date) {
     const begin = this, 

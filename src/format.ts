@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-19 23:43:42
- * @FilePath: /js-moment/src/format.ts
+ * @LastEditTime: 2022-05-20 18:56:14
+ * @FilePath: \moments\src\format.ts
  */
 
 import { localeProps } from './locale.js';
@@ -23,6 +23,7 @@ function format(format = defFormat, locale: localeProps): string {
   const keys = Object.keys(formatter);
   keys.forEach((key: keyof typeof formatter) => {
     const reg = new RegExp(key, 'g');
+    // ! replace th 已被替换过的字符串，需要屏蔽掉
     // @ts-ignore
     formatStr = formatStr.replace(reg, formatter[key]);
   })

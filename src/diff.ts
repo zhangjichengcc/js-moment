@@ -16,19 +16,30 @@ function diff(begin: Moment, end: Moment) {
   // 获取总计相差月数
   function monthDiff(minDate: Moment, maxDate: Moment): number {
     // 整体月份差值（不考虑日带来的影响）
-    const wholeMonthDiff = (maxDate.dateObject.year - minDate.dateObject.year) * 12 + (maxDate.dateObject.month - minDate.dateObject.month),
-    // 锚点日期：起始（min）日期增加月份差值
-    anchor = minDate.clone().addMonth(wholeMonthDiff);
-    // 若锚点日期大于最大日期（max）则表示日差不足一个月，需要 -1
+    const wholeMonthDiff = 
+      (maxDate.dateObject.year - minDate.dateObject.year) * 12 + 
+      (maxDate.dateObject.month - minDate.dateObject.month);
+    // todo 锚点日期：起始（min）日期增加月份差值, 此时使两个日期达到相同月份，以此来比较日的大小
+    const anchor = minDate.clone().addMonth(wholeMonthDiff);
+    // ! 若锚点日期大于最大日期（max）则表示日差不足一个月，需要 -1
     return anchor.getTime() > maxDate.getTime() ? wholeMonthDiff - 1 : wholeMonthDiff;
   }
 
   // 获取取余后剩余天数
   function singleDayDiff(minDate: Moment, maxDate: Moment): number {
-    let diffMonths = maxDate.dateObject.day - minDate.dateObject.day;
+    // 日期差，此时还需考虑日期差为负数及小时差不足1天的情况
+    let diffDays = maxDate.dateObject.day - minDate.dateObject.day;
+    // 整体天数差 （不考虑小时带来的影响）
+    const wholeDayDiff = Math.ceil(wholeTotal.days);
+    // todo 锚点日期：起始（min）日期增加天数差值, 此时使两个日期达到相同日，以此来比较时间的大小
+    const anchor = minDate.clone().addDay(wholeDayDiff);
+    // minDate的最后一个月的天数
     const minDateMonthDays = minDate.getDays();
-    diffMonths += diffMonths > 0 ? 0 : minDateMonthDays;
-    return diffMonths;
+    // ! 若日期差为负数，则表示相差不足一个月，需要加上minDate的最后一个月的天数
+    diffDays += diffDays < 0 ? minDateMonthDays : 0;
+    // ! 若锚点日期大于最大日期（max）则表示小时差不足一天，需要 -1
+    diffDays += anchor.getTime() > maxDate.getTime() ? -1 : 0;
+    return diffDays;
   }
 
   // 完整的日期数量总计，包括小数位
@@ -61,10 +72,10 @@ function diff(begin: Moment, end: Moment) {
   type formatStrParams = 'Y' | 'M' | 'D' | 'h' | 'm' | 's';
   /**
    * 格式化相对日期
-   * @param rule: string 
+   * @param rule string 
    * @returns 
    */
-  function format(rule: string) {
+  function format(rule?: string) {
     let str = '';
     if (rule) {
       str = rule;
@@ -75,15 +86,14 @@ function diff(begin: Moment, end: Moment) {
         str = str.replace(key, String(objs[key]));
       })
     } else {
-      str = `
-        ${years ? `${years}年` : ''}
-        ${years || months ? `${months}个月` : ''}
-        ${!years && months || days ? `${days}天` : ''}
-        ${!years && !months && days || hours ? `${hours}小时` : ''}
-        ${!years && !months && !days && hours || minutes ? `${minutes}分钟` : ''}
-        ${!years && !months && !days && !hours && minutes || seconds ? `${seconds}秒` : ''}
-        ${tag === '+' ? '后' : '前'}
-      `
+      str = 
+        (years ? `${years}年` : '')+
+        ((years || months) ? `${months}个月` : '')+
+        ((!years && (months || days)) ? `${days}天` : '')+
+        ((!years && !months && (days || hours)) ? `${hours}小时` : '')+
+        ((!years && !months && !days && (hours || minutes)) ? `${minutes}分钟` : '')+
+        ((!years && !months && !days && !hours && (minutes || seconds)) ? `${seconds}秒` : '')+
+        (tag === '+' ? '后' : '前')
     }
     return str;
   }
@@ -101,7 +111,7 @@ function diff(begin: Moment, end: Moment) {
     minutes,
     seconds,
     format,
-  }
+  } as const;
 }
 
 export {

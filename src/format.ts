@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-20 18:56:14
+ * @LastEditTime: 2022-05-20 19:04:53
  * @FilePath: \moments\src\format.ts
  */
 
@@ -24,6 +24,8 @@ function format(format = defFormat, locale: localeProps): string {
   keys.forEach((key: keyof typeof formatter) => {
     const reg = new RegExp(key, 'g');
     // ! replace th 已被替换过的字符串，需要屏蔽掉
+    // str = 'abcd'
+    // str.replace(/(?!<)a(?!>)/g, '<b>').replace(/(?!<)b(?!>)/g, '<c>').replace(/(?!<)c(?!>)/g, '<d>').replace(/(?!<)d(?!>)/g, '<e>').replace(/[<|>]/g, '')
     // @ts-ignore
     formatStr = formatStr.replace(reg, formatter[key]);
   })

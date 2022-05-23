@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-20 19:04:53
+ * @LastEditTime: 2022-05-23 16:45:28
  * @FilePath: \moments\src\format.ts
  */
 
@@ -22,13 +22,12 @@ function format(format = defFormat, locale: localeProps): string {
   const formatter = new Formatter(this, locale)
   const keys = Object.keys(formatter);
   keys.forEach((key: keyof typeof formatter) => {
-    const reg = new RegExp(key, 'g');
-    // ! replace th 已被替换过的字符串，需要屏蔽掉
-    // str = 'abcd'
-    // str.replace(/(?!<)a(?!>)/g, '<b>').replace(/(?!<)b(?!>)/g, '<c>').replace(/(?!<)c(?!>)/g, '<d>').replace(/(?!<)d(?!>)/g, '<e>').replace(/[<|>]/g, '')
-    // @ts-ignore
-    formatStr = formatStr.replace(reg, formatter[key]);
+    // ? <%|%> 标记已匹配字符串，防止重复格式化
+    const reg = new RegExp(`(?!<%*[^%>])${key}(?![^<%]*%>)`, 'g');
+    formatStr = formatStr.replace(reg, `<%${formatter[key]}%>`);
   })
+  // 移除字符串边界标记
+  formatStr = formatStr.replace(/[<%|%>]/g, '')
   return formatStr;
 }
 

@@ -30,15 +30,22 @@ function diff(begin: Moment, end: Moment) {
     // 日期差，此时还需考虑日期差为负数及小时差不足1天的情况
     let diffDays = maxDate.dateObject.day - minDate.dateObject.day;
     // 整体天数差 （不考虑小时带来的影响）
-    const wholeDayDiff = Math.ceil(wholeTotal.days);
+    // 此处不能以wholeTotal.days来计算，因为这里直接获取日期的差值，而wholeTotal是整体，会加入时间所带来的影响
+    // const wholeDayDiff = Math.ceil(wholeTotal.days);
+    // 构建新的Date对象，将时分秒格式化为0，以此计算相差天数
+    const wholeDayDiff = (
+      new Date(maxDate.dateObject.year, maxDate.dateObject.month, maxDate.dateObject.day
+    ).getTime() -
+      new Date(minDate.dateObject.year, minDate.dateObject.month, minDate.dateObject.day)
+    .getTime()) / (24*60*60*1000);
     // todo 锚点日期：起始（min）日期增加天数差值, 此时使两个日期达到相同日，以此来比较时间的大小
     const anchor = minDate.clone().addDay(wholeDayDiff);
     // minDate的最后一个月的天数
     const minDateMonthDays = minDate.getDays();
-    // ! 若日期差为负数，则表示相差不足一个月，需要加上minDate的最后一个月的天数
-    diffDays += diffDays < 0 ? minDateMonthDays : 0;
     // ! 若锚点日期大于最大日期（max）则表示小时差不足一天，需要 -1
     diffDays += anchor.getTime() > maxDate.getTime() ? -1 : 0;
+    // ! 若日期差为负数，则表示相差不足一个月，需要加上minDate的最后一个月的天数
+    diffDays += diffDays < 0 ? minDateMonthDays : 0;
     return diffDays;
   }
 

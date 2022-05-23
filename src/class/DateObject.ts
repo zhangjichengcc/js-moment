@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-18 18:20:53
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-20 10:14:25
+ * @LastEditTime: 2022-05-23 10:41:23
  * @FilePath: \moments\src\class\DateObject.ts
  */
 
@@ -23,7 +23,7 @@
    */
   day: number;
   /**
-   * 时 0-24
+   * 时 0-23
    */
   hours: number;
   /**

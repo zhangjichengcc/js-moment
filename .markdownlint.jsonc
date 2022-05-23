@@ -1,0 +1,22 @@
+{
+  "MD024": {
+    "siblings_only": true // 默认为false，设为true时，不同标题下的子标题内容可以重复
+  },
+  "MD013": {
+    "code_block_line_length": 500,  // 代码行的最大长度，按实际情况调整
+    "line_length": 1000 // 行的最大长度
+  },
+  // 文档中不允许使用HTML语句。
+  "MD033": false, 
+  // 图片必须加alt
+  "MD045": false, 
+  // No empty links - 链接的地址不能为空
+  "MD042": false, 
+  // Dollar signs used before commands without showing output 
+  // 在代码块中，终端命令前不需要有美元符号($) 如果代码块中既有终端命令，也有命令的输出，则终端命令前可以有美元符号($)
+  "MD014": false, 
+  // Ordered list item prefix 有序列表的前缀序号格式必须只用1或者从1开始的加1递增数字("one_or_ordered")
+  "MD029": false
+}
+
+// https://www.jianshu.com/p/51523a1c6fe1

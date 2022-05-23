@@ -44,7 +44,9 @@ class Moment {
   * @param type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
   * @returns Moment
   */
-  add(val: number = 0, type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): Moment {
+  add(val?: number, type?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): Moment {
+    val = val || 0;
+    type = type || 'day';
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
     const newDate = new Date(
       type === 'year' ? year + val : year,

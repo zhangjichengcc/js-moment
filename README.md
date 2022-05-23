@@ -203,9 +203,9 @@
   moment(t).format('YYYY-MM-dd');                 // 2019-10-31
   moment(t).format();                             // 2019-10-31 12:00:01
   moment(t).format('YYYY-MM-dd hh:mm:ss');        // 2019-10-31 12:00:01
-  moment(t).format('YYYY年MM月dd日');             // 2019年10月31日
+  moment(t).format('YYYY年MM月dd日') ;             // 2019年10月31日
   moment(t).format('YY-M-d h:m:s');               // 19-10-31 12:0:1
-  moment(t).format('YYYY-MM-dd 星期W AA h:m:s');  // 2019-10-31 星期四 下午 12:0:1
+  moment(t).format('YYYY-MM-dd 星期W AA h:m:s');   // 2019-10-31 星期四 下午 12:0:1
   moment(t).format('MMMMDD');                     // 十月三十一日
   moment(t).format('MMMM.DD.WW', 'en');           // October.31st.Thu
   moment(t).format('MMM dd, YYYY', 'en');         // Oct 31, 2019

@@ -126,7 +126,7 @@
   |属性名|说明|版本|
   |-|-|-|
   |`tag`|标记时间的前后，'-'表示之前；'+'表示之后|v2.1.0|
-  |`years`| 相差的年月日时分秒中的年数|v2.1.0|
+  |`years`| 相差的年月日时分秒中的年数(进制后)|v2.1.0|
   |`months`| 同上，相差月数|v2.1.0|
   |`days`| 同上，相差天数|v2.1.0|
   |`hours`| 同上，相差小时数|v2.1.0|
@@ -138,6 +138,32 @@
   |`total`| 总计相差的时间，包含年月日时分秒的集合，向下取整 | v3.0.0|
   |`wholeTotal`| 总计相差的时间，包含年月日时分秒的集合，包含小数（精确值）|v3.0.0|
   |`format()`|格式化日期差方法 [方法说明](#fromTo_format)|v2.1.0|
+
+- `fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比
+
+> `fromTo().format().total` 日期时间总数，向下取整
+
+> `fromTo().format().years、fromTo().format().months ...`分别包含 年、月、日...
+
+  示例：moment('2022-11-12 12:00:04').fromTo('2020-12-10 1:10:34')
+  |属性名|说明|示例对应值|
+  |-|-|-|
+  |`total.years`|包含总年数|1|
+  |`format().years`|分别包含年数|1|
+  |`total.months`|包含总月数|23|
+  |`format().months`|分别包含月数|11|
+  |`total.days`|包含总天数|702|
+  |`format().days`|分别包含天数|2|
+  |`total.hours`|包含总小时数|16858|
+  |`format().hours`|分别包含小时数|10|
+  |`total.minutes`|包含总分钟数|1011529|
+  |`format().minutes`|分别包含分钟数|49|
+  |`total.seconds`|包含总秒数|60691770|
+  |`format().seconds`|分别包含秒数|30|
+  |`total.quarters`|包含总季度数|7|
+  // todo
+  |`format().quarters`|分别包含季度数|7|
+  |weeks|包含总周数量|100|
 
 - <span id="fromTo_format">`fromTo().format()`</span>
 
@@ -205,6 +231,7 @@
 <h2 style="text-align: center;">相对时间 formTo()</h2>
 
 默认方法
+
 ```js
   const t = '2019-10-31 12:00:01';
 
@@ -229,12 +256,15 @@
 
 ``` js
   const { tag, total, times } = moment(t).fromTo('2018-09-01 08:30:00');
-  // 注意！ `total`和`times`都包含 years,month... 等属性，但 `total` 包含的是已经进制后的时间，而times包含的则是未进制的时间属性，如 1天12个小时, total.hours: 12; times.hours: 36
   `发布于${times.months}个月${total.days}天${tag === '-' ? '之前' : '以后'}` // 发布于14个月5天之前
   `距离高考还有：${times.days}天${total.hours}小时${total.minutes}分钟${total.seconds}秒` // 距离高考还有：425天 3小时 30分钟 1秒 
   `闹钟将于${times.hours}小时${total.minutes}分钟${total.seconds}秒后响起` // 闹钟将于3小时30分钟30秒后响起
 ```
-#### 注意：为方便使用，极大的提高方法的灵活性，本方法将所有时间参数均暴露出来，分别存于`total`和`times`两个内部对象当中，用于开发者自己组装满足自己需求的时间格式， 需要注意的是， `total`和`times`对象内的变量含义不同！`total`中的时间参数均为进制后的，而`times`中的则未进制，举个栗子：
+
+注意：为方便使用，极大的提高方法的灵活性，本方法将所有时间参数均暴露出来，方法 `Moment.fromTo()` 返回
+
+存于`total`和`Moment.fromTo()`两个内部对象当中，用于开发者自己组装满足自己需求的时间格式， 需要注意的是， `total`和`times`对象内的变量含义不同！`total`中的时间参数均为进制后的，而`times`中的则未进制，举个栗子：
+
 **1年 2个月 5天 3小时 30分钟 1秒** 对应的属性值如下表：
 |_|.years|.months|.days|.hours|.minutes|.seconds|
 |-|-|-|-|-|-|-|
@@ -242,7 +272,7 @@
 |total|1|2|5|3|30|1|
 
 所以当我们想要自己拼接时间格式的时候，最大的单位值要取times中的对象，其他则取total中的，如上面的栗子  
-|_|_|_|_|_|_|
+|||||||
 |-|-|-|-|-|-|
 |1年|2个月|5天|3小时|30分钟|1秒|
 ||14个月|5天|3小时|30分钟|1秒|

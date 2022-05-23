@@ -58,7 +58,7 @@ function diff(begin: Moment, end: Moment) {
     minutes  : absDiffMs / 6e4,    // 1000 * 60
     hours    : absDiffMs / 36e5,   // 1000 * 60 * 60
     days     : absDiffMs / 864e5,  // 1000 * 60 * 60 * 24
-    week     : absDiffMs / 6048e5, // 1000 * 60 * 60 * 24 * 7
+    weeks    : absDiffMs / 6048e5, // 1000 * 60 * 60 * 24 * 7
   }
 
   // 日期数量总计，取整

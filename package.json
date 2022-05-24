@@ -33,6 +33,7 @@
   "author": "张吉成",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^17.0.35",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^1.0.1",

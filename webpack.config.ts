@@ -1,10 +1,10 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2022-05-18 18:20:24
+ * @LastEditTime: 2022-05-24 19:07:55
  * @LastEditors: zhangjicheng
  * @Description: 
- * @FilePath: \moments\webpack.config.ts
+ * @FilePath: \js-moment\webpack.config.ts
  * 可以输入预定的版权声明、个性签名、空行等
  */
 const path = require('path');
@@ -34,6 +34,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
+    globalObject: 'this',
     library: {
       name: 'jsmoment',
       type: 'umd', // 将你的 library 暴露为所有的模块定义下都可运行的方式

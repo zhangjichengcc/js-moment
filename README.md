@@ -74,6 +74,7 @@
 |`addWeek(count)`| `count: number`|N|`count: 0`|星期加减|v1.0.0|
 |`addMonth(count)`| `count: number`|N|`count: 0`|月份加减|v1.0.0|
 |`addYear(count)`| `count: number`|N| `count: 0`|年份加减|v1.0.0|
+|`getDays()`| `-`|N| `-` |获取当前月包含天数|v3.0.0|
 |`getTime()`| `-`|N| `-` |获取时间戳|v1.0.0|
 |`fromTo()`| `string\|Date`|N| `new Date()`[当前时间]| 获得相对时间, [方法说明](#fromTo)|v2.1.0|
 |`clone()`|`-`|N|`-`|复制当前 `Moment` 对象|v3.0.0|

@@ -5,7 +5,9 @@
 超轻量级的 moment 格式化及计算时间的组件。
 
 ![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
+![](https://img.shields.io/bundlephobia/minzip/js-moment?color=green&label=gzip)
 ![](https://img.shields.io/bundlephobia/min/js-moment.svg?style=flat)
+![](https://img.shields.io/npm/dw/js-moment)
 </div>
 
 <!-- 简体中文 | [English](./README-en.md) -->
@@ -45,19 +47,19 @@
 |属性名|说明|
 |-|-|
 |`date`|标准 `Date` 对象|
-|`dateObject`| `year`： 年 </br> `month`：月 0-11</br> `day`：日</br>`hours`：时 0-23)</br> `minutes`：分</br> `seconds`：秒</br> `time`：时间戳 </br> `week`：星期 0-6 </br> `quarter`: 季度 0-3 |
+|`dateObject`| `year`： 年 <br> `month`：月 0-11<br> `day`：日<br>`hours`：时 0-23)<br> `minutes`：分<br> `seconds`：秒<br> `time`：时间戳 <br> `week`：星期 0-6 <br> `quarter`: 季度 0-3 |
+  
+- **`Moment.dateObject`**
 
-**`Moment.dateObject`**
-
-- year: number 年
-- month: number 月 0-11
-- day: number 日 1-31
-- hours: number 时 0-23
-- minutes: number 分 0-60
-- seconds: number 秒 0-60
-- time: number 时间戳
-- week: number 星期 0-6
-- quarter: number 季度 0-3
+  - year: number 年
+  - month: number 月 0-11
+  - day: number 日 1-31
+  - hours: number 时 0-23
+  - minutes: number 分 0-60
+  - seconds: number 秒 0-60
+  - time: number 时间戳
+  - week: number 星期 0-6
+  - quarter: number 季度 0-3
 
 ---
 
@@ -66,10 +68,10 @@
 |方法名|参数类型|必填|默认值|方法说明|版本|
 |-|-|-|-|-|-|
 |`format(str)`|`string`|N|~~`'YYYY-MM-DD hh:mm:ss'`~~|格式化时间, [方法说明](#format_params)|v1.0.0|
-|`format(str, locale)`|`str: string`</br>`locale: 'zh'\|'en'`|N|`str: 'yyyy-MM-dd hh:mm:ss'`</br>`locale: 'zh'`|格式化时间, [方法说明](#format_params)|v3.0.0|
-|`add(count, type)`|`count: number`</br>`type: string`|N|`count: 0`</br>`type: 'day'`|日期时间计算方法, [方法说明](#add)|v3.0.0
-|`addTime(count, type)`|`count: number` </br> `type: 'h' \| 'm' \| 's'`|N|`count: 0`</br>`type: 'h'` | 时间加减</br> h: 小时数 </br> m: 分钟数 </br> s: 秒数|v1.0.0|
-|`addDate(count, type)`| `count: number` </br> `type: 'd' \| 'm' \| 'y'`|N| `count: 0`</br>`type: 'd'` | 日期加减</br> y: 年数 </br> m: 月数 </br> d: 天数|v3.0.0|
+|`format(str, locale)`|`str: string`<br>`locale: 'zh'\|'en'`|N|`str: 'yyyy-MM-dd hh:mm:ss'`<br>`locale: 'zh'`|格式化时间, [方法说明](#format_params)|v3.0.0|
+|`add(count, type)`|`count: number`<br>`type: string`|N|`count: 0`<br>`type: 'day'`|日期时间计算方法, [方法说明](#add)|v3.0.0
+|`addTime(count, type)`|`count: number` <br> `type: 'h' \| 'm' \| 's'`|N|`count: 0`<br>`type: 'h'` | 时间加减<br> h: 小时数 <br> m: 分钟数 <br> s: 秒数|v1.0.0|
+|`addDate(count, type)`| `count: number` <br> `type: 'd' \| 'm' \| 'y'`|N| `count: 0`<br>`type: 'd'` | 日期加减<br> y: 年数 <br> m: 月数 <br> d: 天数|v3.0.0|
 |`addDay(count)`| `count: number`|N| `count: 0` |天数加减|v1.0.0|
 |`addWeek(count)`| `count: number`|N|`count: 0`|星期加减|v1.0.0|
 |`addMonth(count)`| `count: number`|N|`count: 0`|月份加减|v1.0.0|
@@ -83,18 +85,18 @@
 
 ### 方法说明
 
-**<span id="format_params">`format()`</span>**
+**<a id="format_params"></a>1. `format()`**
 
 |含义|字符|格式|版本|
 |-|-|-|-|
 |年|`YYYY\|Y\|yyyy\|y`|0000 - 9999|v1.0.0|
 ||`YY\|yy`|00 - 99|v1.0.0|
-|月|`MMMM`|一月 - 十二月 `(zh)`</br> January - December `(en)`|v3.0.0|
-||`MMM`|1月 - 12月 `(zh)`</br> Jan - Dec `(en)`|v3.0.0|
+|月|`MMMM`|一月 - 十二月 `(zh)`<br> January - December `(en)`|v3.0.0|
+||`MMM`|1月 - 12月 `(zh)`<br> Jan - Dec `(en)`|v3.0.0|
 ||`MM`|00 - 12|v1.0.0|
 ||`M`|0 - 12|v1.0.0|
-|日|`DD`|一日 - 三十一日 `(zh)`</br>1st - 31st `(en)`|v3.0.0|
-||`D`|1日 - 31日 `(zh)`</br>1 - 31 `(en)`|v3.0.0|
+|日|`DD`|一日 - 三十一日 `(zh)`<br>1st - 31st `(en)`|v3.0.0|
+||`D`|1日 - 31日 `(zh)`<br>1 - 31 `(en)`|v3.0.0|
 ||`dd`|00 - 31|v1.0.0|
 ||`d`|1 - 31|v1.0.0|
 |时|`HH`|00 - 24|v1.0.0|
@@ -108,19 +110,21 @@
 |子午线|`AA`|上午 / 下午|v2.2.0|
 ||`A`|AM / PM|v2.2.0|
 ||`a`|am / pm|v2.2.0|
-|星期|`WWW`|星期日、星期一 ... 星期六 `(zh)`</br>Sunday、 Monday ... Saturday `(en)`|v3.0.0|
-||`WW`|周日、周一 ... 周六 `(zh)`</br>Sun、Mon ... Sat `(en)`|v3.0.0|
-||`W`|日、一 ... 六 `(zh)`</br>Su、Mo ... Sa `(en)`|v3.0.0|
+|星期|`WWW`|星期日、星期一 ... 星期六 `(zh)`<br>Sunday、 Monday ... Saturday `(en)`|v3.0.0|
+||`WW`|周日、周一 ... 周六 `(zh)`<br>Sun、Mon ... Sat `(en)`|v3.0.0|
+||`W`|日、一 ... 六 `(zh)`<br>Su、Mo ... Sa `(en)`|v3.0.0|
 ||`w`|0 - 6|v2.2.0|
 |季度|`Q`|一、二、三、四|v2.2.0|
 ||`q`|1 - 4|v2.2.0|
 
-**<span id="fromTo">`fromTo()`</span>**
+---
+
+**<a id="fromTo"></a>2. `fromTo()`**
 
 > 获取当前 `Moment` 对象与传入日期的差值 `moment(date).formTo(date)`
 
 - 入参  
-  标准日期格式字符串（如 YYYY-MM-DD HH:mm:ss）| `Date` 对象
+  标准日期格式字符串（如 yyyy-MM-dd hh:mm:ss）| `Date` 对象
 
 - 返回值
 
@@ -140,12 +144,14 @@
   |`wholeTotal`| 总计相差的时间，包含年月日时分秒的集合，包含小数（精确值）|v3.0.0|
   |`format()`|格式化日期差方法 [方法说明](#fromTo_format)|v2.1.0|
 
-- <span id="formTo_format_total_diff">`fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比</span>
+---
+
+<a id="formTo_format_total_diff"></a>
+
+- 2.1 `fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比
 
   - `fromTo().format().total` 日期时间总数，向下取整
   - `fromTo().format().years、fromTo().format().months ...`分别包含 年、月、日...
-
-  示例：moment('2022-11-12 12:00:04').fromTo('2020-12-10 1:10:34')
 
   |属性名|说明|示例对应值|
   |-|-|-|
@@ -166,31 +172,44 @@
   |`total.weeks`|包含总周数量|100|
   |`format().weeks`|包含总周数量|100|
 
-- <span id="fromTo_format">`fromTo().format()`</span>
+  示例：
+
+  ``` js
+  moment('2022-11-12 12:00:04').fromTo('2020-12-10 1:10:34')
+  ```
+
+<a id="fromTo_format"></a>
+
+- 2.2 `fromTo().format()`
 
   |方法名|参数类型|默认值|版本|方法说明|返回值|
   |-|-|-|-|-|-|
-  |format|String|Null|v2.1.0|格式化相对日期|根据日期差自动生成，默认取两位
-  |
+  |format|String|Null|v2.1.0|格式化相对日期|根据日期差自动生成，默认取两位|
+
+  示例：
+
+  ``` js
+  moment('2021-02-20 12:00:01').fromTo('2022-02-19 10:19:50').format();  // '11个月29天后'
+  ```
 
   format 入参格式字符
 
-  |字符|含义|
-  |-|-|
-  |y|年|
-  |M|月|
-  |d|日|
-  |h|时|
-  |m|分|
-  |s|秒|
+  ||||||||
+  |-|:-:|:-:|:-:|:-:|:-:|:-:|
+  |含义|年|月|日|时|分|秒|
+  |字符|y|M|d|h|m|s|
+
+  示例：
 
   ``` js
   moment('2021-01-20 12:00:01').fromTo('2022-02-19: 11:19:50').format('y年M个月d天'); // '1年0个月12天'
   ```
+  
+  详情可参考 [方法示例](#fromTo_demo)
 
-[方法示例](#fromTo_demo)
+---
 
-**<span id="add">`add()`</span>**
+**<a id="add"></a>3. `add()`**
 
 > 日期时间计算方法
 
@@ -199,7 +218,7 @@
   |参数|说明|必填|默认值|
   |-|-|-|-|
   |count|计算数量 number|N|0|
-  |type|计量单位 string</br> `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'`|N|`'day'`|
+  |type|计量单位 string<br> `'year'\|'month'\|'day'\|'hour'\|'minute'\|'second'`|N|`'day'`|
 
 - 返回值  
   `Moment` 对象
@@ -247,7 +266,7 @@
   moment(t).addTime(1, 's').format(); // 2019-10-31 12:00:02
 ```
 
-<h2 id="fromTo_demo" style="text-align: center;">相对时间 formTo()</h2>
+<h2 style="text-align: center;"><a id="fromTo_demo"></a>相对时间 formTo()</h2>
 
 默认方法
 
@@ -284,7 +303,7 @@
 - **v3.0.0**  
 
   1. 添加 `typescript` 语法校验提示，在ts项目中会自动提示相关参数及说明；
-  2. 更新 `format()` 方法，新增中英文区分（zh | en），新增 月份`MMMM、MMM`、星期 `WWW、WW`）等格式化规则，<span style="color: #f00">需要注意，在v3.0.0以后，'DD'表示大写日期，即'一月 - 十二月，小写日期用'dd'表示</span>参考[format方法说明](#format_params)；
+  2. 更新 `format()` 方法，新增中英文区分（zh | en），新增 月份`MMMM、MMM`、星期 `WWW、WW`）等格式化规则，<a style="color: #f00">需要注意，在v3.0.0以后，'DD'表示大写日期，即'一月 - 十二月，小写日期用'dd'表示</a>参考[format方法说明](#format_params)；
   3. 重构 `formTo()` 方法，v3.0.0以前月份采用固定的30天来计算，v3.0.0以后则以自然月进行计算；
   4. 新增 `add()` 方法，参考[add()方法说明](#add)；
   5. `Moment` 对象新增 `time` 时间戳、`week` 星期、`quarter` 季度等字段；

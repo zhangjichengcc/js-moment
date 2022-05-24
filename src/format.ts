@@ -2,15 +2,15 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:45:07
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-23 16:45:28
+ * @LastEditTime: 2022-05-24 11:45:46
  * @FilePath: \moments\src\format.ts
  */
 
-import { localeProps } from './locale.js';
-import Formatter from './class/Formatter.js';
+import { localeProps } from './locale';
+import Formatter from './class/Formatter';
 
 // 默认格式
-const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
+const defFormat: string = 'yyyy-MM-dd hh:mm:ss';
 
 /**
  * 格式化日期方法

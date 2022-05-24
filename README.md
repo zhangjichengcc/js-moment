@@ -65,8 +65,8 @@
 
 |方法名|参数类型|必填|默认值|方法说明|版本|
 |-|-|-|-|-|-|
-|`format(str)`|`string`|N|`'YYYY-MM-DD hh:mm:ss'`|格式化时间, [方法说明](#format_params)|v1.0.0|
-|`format(str, locale)`|`str: string`</br>`locale: 'zh'\|'en'`|N|`str: 'YYYY-MM-dd hh:mm:ss'`</br>`locale: 'zh'`|格式化时间, [方法说明](#format_params)|v3.0.0|
+|`format(str)`|`string`|N|~~`'YYYY-MM-DD hh:mm:ss'`~~|格式化时间, [方法说明](#format_params)|v1.0.0|
+|`format(str, locale)`|`str: string`</br>`locale: 'zh'\|'en'`|N|`str: 'yyyy-MM-dd hh:mm:ss'`</br>`locale: 'zh'`|格式化时间, [方法说明](#format_params)|v3.0.0|
 |`add(count, type)`|`count: number`</br>`type: string`|N|`count: 0`</br>`type: 'day'`|日期时间计算方法, [方法说明](#add)|v3.0.0
 |`addTime(count, type)`|`count: number` </br> `type: 'h' \| 'm' \| 's'`|N|`count: 0`</br>`type: 'h'` | 时间加减</br> h: 小时数 </br> m: 分钟数 </br> s: 秒数|v1.0.0|
 |`addDate(count, type)`| `count: number` </br> `type: 'd' \| 'm' \| 'y'`|N| `count: 0`</br>`type: 'd'` | 日期加减</br> y: 年数 </br> m: 月数 </br> d: 天数|v3.0.0|
@@ -139,13 +139,13 @@
   |`wholeTotal`| 总计相差的时间，包含年月日时分秒的集合，包含小数（精确值）|v3.0.0|
   |`format()`|格式化日期差方法 [方法说明](#fromTo_format)|v2.1.0|
 
-- `fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比
+- <span id="formTo_format_total_diff">`fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比</span>
 
-> `fromTo().format().total` 日期时间总数，向下取整
-
-> `fromTo().format().years、fromTo().format().months ...`分别包含 年、月、日...
+  - `fromTo().format().total` 日期时间总数，向下取整
+  - `fromTo().format().years、fromTo().format().months ...`分别包含 年、月、日...
 
   示例：moment('2022-11-12 12:00:04').fromTo('2020-12-10 1:10:34')
+
   |属性名|说明|示例对应值|
   |-|-|-|
   |`total.years`|包含总年数|1|
@@ -161,15 +161,33 @@
   |`total.seconds`|包含总秒数|60691770|
   |`format().seconds`|分别包含秒数|30|
   |`total.quarters`|包含总季度数|7|
-  // todo
-  |`format().quarters`|分别包含季度数|7|
-  |weeks|包含总周数量|100|
+  |`format().quarters`|包含季度数|7|
+  |`total.weeks`|包含总周数量|100|
+  |`format().weeks`|包含总周数量|100|
 
 - <span id="fromTo_format">`fromTo().format()`</span>
 
-  |方法名|参数类型|默认值|版本|方法说明|
-  |-|-|-|-|-|
-  |format|String|Null|v2.1.0|格式化相对日期|
+  |方法名|参数类型|默认值|版本|方法说明|返回值|
+  |-|-|-|-|-|-|
+  |format|String|Null|v2.1.0|格式化相对日期|根据日期差自动生成，默认取两位
+  |
+
+  format 入参格式字符
+
+  |字符|含义|
+  |-|-|
+  |y|年|
+  |M|月|
+  |d|日|
+  |h|时|
+  |m|分|
+  |s|秒|
+
+  ``` js
+  moment('2021-01-20 12:00:01').fromTo('2022-02-19: 11:19:50').format('y年M个月d天'); // '1年0个月12天'
+  ```
+
+[方法示例](#fromTo_demo)
 
 **<span id="add">`add()`</span>**
 
@@ -192,7 +210,7 @@
 <h2 style="text-align: center;">引入</h2>
 
 ```js
-  import jsMoment from 'js-moment';
+  import moment from 'js-moment';
 ```
 
 <h2 style="text-align: center;">日期格式化</h2>
@@ -228,59 +246,37 @@
   moment(t).addTime(1, 's').format(); // 2019-10-31 12:00:02
 ```
 
-<h2 style="text-align: center;">相对时间 formTo()</h2>
+<h2 id="fromTo_demo" style="text-align: center;">相对时间 formTo()</h2>
 
 默认方法
 
-```js
-  const t = '2019-10-31 12:00:01';
+例：
 
-  moment(t).fromTo();                               // {total: {…}, wholeTotal: {…}, tag: '+', years: 2, months: 6, …}, tag: "+", years: 0, months: 0, days: 0, …}
-  moment(t).fromTo('2018-09-01 08:30:00').format(); // 1年1个月前
-  moment(t).fromTo('2019-08-01 08:30:00').format(); // 2个月30天前
-  moment(t).fromTo('2019-10-31 13:01:25').format(); // 1小时1分钟后
-  moment(t).fromTo('2019-10-31 12:01:25').format(); // 1分钟24秒后
+  ``` js
+  moment('2021-01-20 12:00:01').fromTo('2022-02-19 10:19:50').format();  // '1年后'
+  moment('2021-02-20 12:00:01').fromTo('2022-02-19 10:19:50').format();  // '11个月29天后'
+  moment('2022-01-20 12:00:01').fromTo('2022-01-13 10:19:50').format();  // '7天1小时前'
+  moment('2022-01-20 12:00:01').fromTo('2022-01-20 10:19:50').format();  // '1小时40分钟前'
+  moment('2022-01-20 12:00:01').fromTo('2022-01-20 12:19:50').format();  // '19分钟49秒后'
 ```
 
 自定义格式
 
 ``` js
-  moment(t).fromTo('2018-09-01 08:30:00').format('Y年M个月D天h小时m分钟s秒'); // 1年2个月5天3小时30分钟1秒
-  moment(t).fromTo('2018-09-01 08:30:00').format('Y年M个月D天');   // 1年2个月5天
-  moment(t).fromTo('2018-09-01 08:30:00').format('M个月D天h小时'); // 14个月5天3小时
-  moment(t).fromTo('2018-09-01 08:30:00').format('h小时m分钟s秒'); // 10203小时30分钟
-  // 通过属性自行构造显示格式 **不推荐使用，若有必要，请仔细阅读使用方法**
-```
+  moment('2021-01-20 12:00:01').fromTo('2022-02-19: 11:19:50').format('y年M个月d天'); // '1年0个月12天'
+  moment('2021-01-20 12:00:01').fromTo('2022-02-19: 11:19:50').format('y年M个月d天h小时m分钟s秒'); // '1年0个月12天7小时11分钟18秒'
+  ```
 
 自定义拼接
 
+> 注意：为方便使用，极大的提高方法的灵活性，本方法将所有时间参数均暴露出来，方法 `Moment.fromTo()` 返回分别包含（进制后）的日期时间数及 `total` 对象，`total` 对象中存放对应的日期间隔总数[参考对比](#formTo_format_total_diff)，在自定义拼接时需要两者配合使用，如下示例
+
 ``` js
-  const { tag, total, times } = moment(t).fromTo('2018-09-01 08:30:00');
-  `发布于${times.months}个月${total.days}天${tag === '-' ? '之前' : '以后'}` // 发布于14个月5天之前
-  `距离高考还有：${times.days}天${total.hours}小时${total.minutes}分钟${total.seconds}秒` // 距离高考还有：425天 3小时 30分钟 1秒 
-  `闹钟将于${times.hours}小时${total.minutes}分钟${total.seconds}秒后响起` // 闹钟将于3小时30分钟30秒后响起
+  const { tag, years, months, days, hours, minutes, seconds, total } = moment(t).fromTo('2018-09-01 08:30:00');
+  `发布于${total.months}个月${days}天${tag === '-' ? '之前' : '以后'}` // 发布于14个月5天之前
+  `距离高考还有：${total.days}天${hours}小时${minutes}分钟${seconds}秒` // 距离高考还有：425天 3小时 30分钟 1秒 
+  `闹钟将于${total.hours}小时${minutes}分钟${seconds}秒后响起` // 闹钟将于3小时30分钟30秒后响起
 ```
-
-注意：为方便使用，极大的提高方法的灵活性，本方法将所有时间参数均暴露出来，方法 `Moment.fromTo()` 返回
-
-存于`total`和`Moment.fromTo()`两个内部对象当中，用于开发者自己组装满足自己需求的时间格式， 需要注意的是， `total`和`times`对象内的变量含义不同！`total`中的时间参数均为进制后的，而`times`中的则未进制，举个栗子：
-
-**1年 2个月 5天 3小时 30分钟 1秒** 对应的属性值如下表：
-|_|.years|.months|.days|.hours|.minutes|.seconds|
-|-|-|-|-|-|-|-|
-|times|1|14|425|10203|612210|36732601|
-|total|1|2|5|3|30|1|
-
-所以当我们想要自己拼接时间格式的时候，最大的单位值要取times中的对象，其他则取total中的，如上面的栗子  
-|||||||
-|-|-|-|-|-|-|
-|1年|2个月|5天|3小时|30分钟|1秒|
-||14个月|5天|3小时|30分钟|1秒|
-|||425天|3小时|30分钟|1秒|
-||||10203小时|30分钟|1秒|
-|||||612210分钟|1秒|
-||||||36732601秒|
-         
 
 ## 更新日志
 

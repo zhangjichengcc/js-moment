@@ -1,8 +1,8 @@
-import moment from "../index.js";
-import DateObject from '../class/DateObject.js';
-import { format } from '../format.js';
-import { diff } from '../diff.js';
-import { localeProps } from '../locale.js';
+import moment from "../index";
+import DateObject from '../class/DateObject';
+import { format } from '../format';
+import { diff } from '../diff';
+import { localeProps } from '../locale';
 
 
 // 默认格式

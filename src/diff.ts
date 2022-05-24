@@ -1,4 +1,4 @@
-import Moment from './class/Moment.js';
+import Moment from './class/Moment';
 
 /**
  * 获取相对时间
@@ -59,7 +59,7 @@ function diff(begin: Moment, end: Moment) {
     hours    : absDiffMs / 36e5,   // 1000 * 60 * 60
     days     : absDiffMs / 864e5,  // 1000 * 60 * 60 * 24
     weeks    : absDiffMs / 6048e5, // 1000 * 60 * 60 * 24 * 7
-  }
+  } as const;
 
   // 日期数量总计，取整
   const total = Object.fromEntries(Object.entries(wholeTotal).map(([key, value]) => [key, Math.floor(value)]));
@@ -76,7 +76,7 @@ function diff(begin: Moment, end: Moment) {
     days     = singleDayDiff(minDate, maxDate),
     weeks    = total.week;
 
-  type formatStrParams = 'Y' | 'M' | 'D' | 'h' | 'm' | 's';
+  type formatStrParams = 'y' | 'M' | 'd' | 'h' | 'm' | 's';
   /**
    * 格式化相对日期
    * @param rule string 
@@ -87,7 +87,7 @@ function diff(begin: Moment, end: Moment) {
     if (rule) {
       str = rule;
       const objs: {[key in formatStrParams]: number} = { 
-        Y: years, M: months, D: days, h: hours, m: minutes, s: seconds
+        y: years, M: months, d: days, h: hours, m: minutes, s: seconds
       };
       Object.keys(objs).forEach((key: formatStrParams) => {
         str = str.replace(key, String(objs[key]));
@@ -95,11 +95,11 @@ function diff(begin: Moment, end: Moment) {
     } else {
       str = 
         (years ? `${years}年` : '')+
-        ((years || months) ? `${months}个月` : '')+
-        ((!years && (months || days)) ? `${days}天` : '')+
-        ((!years && !months && (days || hours)) ? `${hours}小时` : '')+
-        ((!years && !months && !days && (hours || minutes)) ? `${minutes}分钟` : '')+
-        ((!years && !months && !days && !hours && (minutes || seconds)) ? `${seconds}秒` : '')+
+        (months ? `${months}个月` : '')+
+        ((!years && days) ? `${days}天` : '')+
+        ((!years && !months && hours) ? `${hours}小时` : '')+
+        ((!years && !months && !days && minutes) ? `${minutes}分钟` : '')+
+        ((!years && !months && !days && !hours && seconds) ? `${seconds}秒` : '')+
         (tag === '+' ? '后' : '前')
     }
     return str;

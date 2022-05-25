@@ -20,6 +20,9 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen" 
     },
+    // https://stackoverflow.com/questions/43042889/typescript-referenceerror-exports-is-not-defined
+    // npx nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm' ./src/index.ts
+    // node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts
     {
       "name": "Current TS File",
       "type": "node",

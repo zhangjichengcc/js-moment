@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2021-04-01 17:43:16
- * @LastEditTime: 2022-05-25 14:25:01
+ * @LastEditTime: 2022-05-25 18:18:25
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \js-moment\tsconfig.json
@@ -12,12 +12,13 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "ESNext",
+    "module": "commonjs",
+    "target": "esnext",
     "sourceMap": true, // 调试 ts 源码  
     "allowJs": true,
-    // "experimentalDecorators": true,
-    // "esModuleInterop":true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
     "paths": {
       "@/*": ["./src/*"],
       "@class/*": ["./src/class/*"],

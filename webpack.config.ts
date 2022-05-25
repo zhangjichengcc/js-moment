@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2022-05-24 19:07:55
+ * @LastEditTime: 2022-05-25 10:41:44
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \js-moment\webpack.config.ts
@@ -36,7 +36,7 @@ module.exports = {
     filename: 'index.js',
     globalObject: 'this',
     library: {
-      name: 'jsmoment',
+      name: 'moment',
       type: 'umd', // 将你的 library 暴露为所有的模块定义下都可运行的方式
     },
   },

@@ -146,9 +146,7 @@
 
 ---
 
-<a id="formTo_format_total_diff"></a>
-
-- 2.1 `fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比
+- <a id="formTo_format_total_diff"></a>2.1 `fromTo().format().total` 与 `fromTo().format().years、fromTo().format().months ...` 等对比
 
   - `fromTo().format().total` 日期时间总数，向下取整
   - `fromTo().format().years、fromTo().format().months ...`分别包含 年、月、日...
@@ -178,9 +176,7 @@
   moment('2022-11-12 12:00:04').fromTo('2020-12-10 1:10:34')
   ```
 
-<a id="fromTo_format"></a>
-
-- 2.2 `fromTo().format()`
+- <a id="fromTo_format"></a>2.2 `fromTo().format()`
 
   |方法名|参数类型|默认值|版本|方法说明|返回值|
   |-|-|-|-|-|-|

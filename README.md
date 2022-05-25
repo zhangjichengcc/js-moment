@@ -328,7 +328,5 @@
 
 ## 🤝 参与共建
 
-莫得参与，莫得共建，莫得赞助
-
 - author zhangjicheng
 - Email zhangjichengcc@163.com

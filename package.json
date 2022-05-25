@@ -1,6 +1,6 @@
 {
   "name": "js-moment",
-  "version": "3.0.0",
+  "version": "3.0.0-alpha.0",
   "description": "时间格式化及计算方法",
   "repository": "https://github.com/zhangjichengcc/moments",
   "private": false,
@@ -40,7 +40,7 @@
     "ts-loader": "^8.1.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
-    "webpack": "^5.28.0",
+    "webpack": "^5.72.1",
     "webpack-cli": "^4.6.0"
   }
 }

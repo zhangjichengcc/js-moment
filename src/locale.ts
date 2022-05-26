@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-19 17:12:25
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-20 18:50:32
- * @FilePath: \moments\src\locale.ts
+ * @LastEditTime: 2022-05-26 18:02:24
+ * @FilePath: \js-moment\src\locale.ts
  */
 
 type localeProps = 'zh' | 'en'; 
@@ -20,6 +20,7 @@ const locale = {
     weekdays : '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
     weekdaysShort : '周日_周一_周二_周三_周四_周五_周六'.split('_'),
     weekdaysMin : '日_一_二_三_四_五_六'.split('_'),
+    quarter: '春_夏_秋_冬'.split('_'),
   },
   /**
    * English
@@ -32,6 +33,7 @@ const locale = {
     weekdays : 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
     weekdaysShort : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
     weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+    quarter: 'spring_summer_autumn_winter'.split('_'),
   }
 }
 

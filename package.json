@@ -1,6 +1,6 @@
 {
   "name": "js-moment",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "时间格式化及计算方法",
   "repository": "https://github.com/zhangjichengcc/js-moment",
   "private": false,
@@ -23,7 +23,6 @@
   },
   "files": [
     "/dist",
-    "/src",
     "moment.d.ts",
     "/README.md",
     "/README-en.md"

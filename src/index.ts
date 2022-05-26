@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 11:54:31
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-24 11:38:23
- * @FilePath: \moments\src\index.ts
+ * @LastEditTime: 2022-05-26 20:43:20
+ * @FilePath: \js-moment\src\index.ts
  */
 
 import { standardDate } from './utils';
@@ -20,3 +20,5 @@ function moment(date?: string | Date): Moment {
 }
 
 export default moment;
+
+moment().format('h')

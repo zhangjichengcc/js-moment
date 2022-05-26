@@ -30,8 +30,42 @@ class Moment {
   
   /**
    * 日期格式化
-   * @param: string, default 'YYYY-MM-DD hh:mm:ss'
-   * @returns string
+   * @param str default 'yyyy-MM-dd HH:mm:ss'; 
+   * @description 格式关键字说明 👇
+   * @YYYY 年度 4位;
+   * @yyyy 年度 4位;
+   * @YY 年度 后2位;
+   * @yy 年度 后2位;
+   * @Y 年度 全4位;
+   * @y 年度 全4位;
+   * @MMMM 月份 大写 （zh: 一月 - 十二月 | en: January - December）;
+   * @MMM 月份 小写 （zh: 1月 - 12月 | en: Jan - Dec）;
+   * @MM 月份 2位 （01 - 12）;
+   * @M 月份 不补位 （1 - 12）;
+   * @DD 日 大写 （zh: 一日 - 三十一日 | en: 1st - 31st）;
+   * @dd 日 2位 （01 - 31）;
+   * @D 日 小写 （zh: 1日 - 31日 | en: 1 - 31）;
+   * @d 日 不补位 （1 - 31）;
+   * @HH 时 24小时制 2位 （00 - 23）;
+   * @H 时 24小时制 不补位 （1 - 23）;
+   * @hh 时 12小时制 2位 （00 - 12）;
+   * @h 时 12小时制 不补位 （1 - 12）;
+   * @mm 分 2位 （00 - 59）;
+   * @m 分 不补位 （0 - 59）;
+   * @ss 秒 2位 （00 - 59）;
+   * @s 秒 不补位 （0 - 59）;
+   * @WWW 星期 完整 （zh: 星期日、星期一 - 星期六 | en: Sunday、Monday - Saturday）;
+   * @WW 星期 简写 （zh: 周日、周一 - 周六 | en: Sun、Mon - Sat）;
+   * @W 星期 缩写 （zh: 日、一 - 六 | en: Su、Mo - Sa）；
+   * @w 星期 数字 （0 - 6）;
+   * @AA 子午线 （上午 | 下午）;
+   * @A 子午线 （AM | PM）;
+   * @a 子午线 （am | pm）;
+   * @QQ 季度 四季 （zh：春、夏、秋、冬 | en: spring、summer、autumn、winter）
+   * @Q 季度 大写 （一、二、三、四）;
+   * @q 季度 小写 （1、2、3、4）;
+   * @description 👆
+   * @returns 格式化后的字符串
    */
   format(str?: string, locale?: localeProps): string {
     locale = locale || 'zh'; // 默认为中文
@@ -41,7 +75,7 @@ class Moment {
   /**
   * 日期算法
   * @param val: number 
-  * @param type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
+  * @param type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' 默认为 'day'
   * @returns Moment
   */
   add(val?: number, type?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): Moment {
@@ -76,7 +110,7 @@ class Moment {
   /**
    * 时间加减
    * @param val number
-   * @param type 'h' | 'm' | 's'
+   * @param type 'h' | 'm' | 's' 默认为 'h'
    * @returns 
    */
   addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
@@ -142,7 +176,6 @@ class Moment {
   /**
    * 获取相对时间
    * @param date: string | Date | undefined
-   * @returns string
    */
   fromTo(date?: string | Date) {
     const begin = this, 

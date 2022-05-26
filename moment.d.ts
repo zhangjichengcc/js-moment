@@ -2,12 +2,10 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 15:08:55
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-26 18:19:17
+ * @LastEditTime: 2022-05-27 00:11:40
  * @FilePath: \js-moment\moment.d.ts
  * @js-moment ts类型声明文件
  */
-
-// import moment from './src/index';
 
 type localeProps = 'zh' | 'en'; 
 type inputDate = Date | string;
@@ -128,7 +126,17 @@ declare namespace moment {
     seconds: number;
     /**
      * 间隔时间格式化方法
-     * @param str 日期格式化字符串，y：年; 'M：月; d：日; h：时; m：分; s：秒
+     * @param rule 日期格式化字符串
+     * 
+     * @description 格式关键字说明 👇
+     * @y 年数
+     * @M 月数
+     * @d 天数
+     * @h 小时数
+     * @m 分钟数
+     * @s 秒数
+     * @description 👆
+     * 
      * @returns string 格式化后字符串
      */
     format: (str: string) => string;
@@ -262,7 +270,7 @@ declare namespace moment {
     /**
      * 获取相对时间
      * @param date string | Date | undefined
-     * @returns string
+     * @returns DateDiff
      */
     fromTo(date?: inputDate): DateDiff;
   }

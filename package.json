@@ -24,8 +24,7 @@
   "files": [
     "/dist",
     "moment.d.ts",
-    "/README.md",
-    "/README-en.md"
+    "/README.md"
   ],
   "author": {
     "name": "张吉成",

@@ -6,6 +6,47 @@ import Moment from './class/Moment';
  * @param end: Moment
  * @returns 
 */
+
+type WholeTotal = {
+  /** 总年数 */
+  years: number;
+  /** 总月数 */
+  months: number;
+  /** 总季度数 */
+  quarters: number;
+  /** 总秒数 */
+  seconds: number;
+  /** 总分钟数 */
+  minutes: number;
+  /** 总小时数 */
+  hours: number;
+  /** 总天数 */
+  days: number;
+  /** 总周数 */
+  weeks: number;
+}
+
+type Total = {
+  /** 总年数 */
+  years: number;
+  /** 总月数 */
+  months: number;
+  /** 总季度数 */
+  quarters: number;
+  /** 总秒数 */
+  seconds: number;
+  /** 总分钟数 */
+  minutes: number;
+  /** 总小时数 */
+  hours: number;
+  /** 总天数 */
+  days: number;
+  /** 总周数 */
+  weeks: number;
+};
+
+type formatStrParams = 'y' | 'M' | 'd' | 'h' | 'm' | 's';
+
 function diff(begin: Moment, end: Moment) {
   const
     absDiffMs = Math.abs(end.dateObject.time - begin.dateObject.time),
@@ -50,7 +91,7 @@ function diff(begin: Moment, end: Moment) {
   }
 
   // 完整的日期数量总计，包括小数位
-  const wholeTotal = {
+  const wholeTotal: WholeTotal = {
     years    : diffMonths / 12,
     months   : diffMonths,
     quarters : diffMonths / 3,
@@ -59,10 +100,10 @@ function diff(begin: Moment, end: Moment) {
     hours    : absDiffMs / 36e5,   // 1000 * 60 * 60
     days     : absDiffMs / 864e5,  // 1000 * 60 * 60 * 24
     weeks    : absDiffMs / 6048e5, // 1000 * 60 * 60 * 24 * 7
-  } as const;
+  };
 
   // 日期数量总计，取整
-  const total = Object.fromEntries(Object.entries(wholeTotal).map(([key, value]) => [key, Math.floor(value)]));
+  const total = Object.fromEntries(Object.entries(wholeTotal).map(([key, value]) => [key, Math.floor(value)])) as Total;
 
   
   // 分别包括数
@@ -74,15 +115,24 @@ function diff(begin: Moment, end: Moment) {
     minutes  = total.minutes - total.hours * 60,
     hours    = total.hours - total.days * 24,
     days     = singleDayDiff(minDate, maxDate),
-    weeks    = total.week;
+    weeks    = total.weeks;
 
-  type formatStrParams = 'y' | 'M' | 'd' | 'h' | 'm' | 's';
   /**
-   * 格式化相对日期
-   * @param rule string 
-   * @returns 
+   * 间隔时间格式化方法
+   * @param rule 日期格式化字符串
+   * 
+   * @description 格式关键字说明 👇
+   * @y 年数
+   * @M 月数
+   * @d 天数
+   * @h 小时数
+   * @m 分钟数
+   * @s 秒数
+   * @description 👆
+   * 
+   * @returns string 格式化后字符串
    */
-  function format(rule?: string) {
+  function format(rule?: string): string {
     let str = '';
     if (rule) {
       str = rule;

@@ -4,10 +4,6 @@ import { format } from '../format';
 import { diff } from '../diff';
 import { localeProps } from '../locale';
 
-
-// 默认格式
-const defFormat: string = 'YYYY-MM-DD hh:mm:ss';
-
 /**
  * 日期对象类
  */
@@ -65,7 +61,7 @@ class Moment {
    * @Q 季度 大写 （一、二、三、四）;
    * @q 季度 小写 （1、2、3、4）;
    * @description 👆
-   * @returns 格式化后的字符串
+   * @returns string 格式化后的字符串
    */
   format(str?: string, locale?: localeProps): string {
     locale = locale || 'zh'; // 默认为中文
@@ -111,7 +107,7 @@ class Moment {
    * 时间加减
    * @param val number
    * @param type 'h' | 'm' | 's' 默认为 'h'
-   * @returns 
+   * @returns Moment
    */
   addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
     type = type || 'h';
@@ -176,6 +172,7 @@ class Moment {
   /**
    * 获取相对时间
    * @param date: string | Date | undefined
+   * @returns Object
    */
   fromTo(date?: string | Date) {
     const begin = this, 

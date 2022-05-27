@@ -1,11 +1,11 @@
 {
   "name": "js-moment",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "时间格式化及计算方法",
   "repository": "https://github.com/zhangjichengcc/js-moment",
   "private": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./lib/main.js",
+  "module": "./lib/main.js",
   "typings": "./moment.d.ts",
   "keywords": [
     "moment",
@@ -22,7 +22,7 @@
     "build": "echo \"编译&压缩代码\" && env MINIFY=1 webpack"
   },
   "files": [
-    "/dist",
+    "/lib",
     "moment.d.ts",
     "/README.md"
   ],

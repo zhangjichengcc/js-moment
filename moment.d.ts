@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 15:08:55
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-27 00:11:40
- * @FilePath: \js-moment\moment.d.ts
+ * @LastEditTime: 2022-05-27 17:09:13
+ * @FilePath: \wetaxe:\webspace\js-moment\moment.d.ts
  * @js-moment ts类型声明文件
  */
 
@@ -139,7 +139,7 @@ declare namespace moment {
      * 
      * @returns string 格式化后字符串
      */
-    format: (str: string) => string;
+    format: (rule: string) => string;
   }
 
   /**

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2022-05-25 16:35:48
+ * @LastEditTime: 2022-05-27 15:50:26
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \js-moment\webpack.config.ts
@@ -32,10 +32,10 @@ module.exports = {
     },
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
-    // https://webpack.js.org/configuration/output/#outputglobalobject
+    path: path.resolve(__dirname, 'lib'),
+    filename: 'main.js',
     library: 'moment',
+    // https://webpack.js.org/configuration/output/#outputglobalobject
     globalObject: 'this',
     libraryTarget: 'umd', // 将你的 library 暴露为所有的模块定义下都可运行的方式
   },

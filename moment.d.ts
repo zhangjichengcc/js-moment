@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 15:08:55
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-27 17:09:13
- * @FilePath: \wetaxe:\webspace\js-moment\moment.d.ts
+ * @LastEditTime: 2022-06-20 09:50:12
+ * @FilePath: \js-moment\moment.d.ts
  * @js-moment ts类型声明文件
  */
 
@@ -199,6 +199,7 @@ declare namespace moment {
      * @Q 季度 大写 （一、二、三、四）;
      * @q 季度 小写 （1、2、3、4）;
      * @description 👆
+     * @param locale 'zh' | 'en' default 'zh'
      * @returns 格式化后的字符串
      */
     format(str?: string, locale?: localeProps): string;

@@ -74,7 +74,7 @@ class Moment {
   * @param type: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' 默认为 'day'
   * @returns Moment
   */
-  add(val?: number, type?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): Moment {
+  add(val?: number, type?: 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'): this {
     val = val || 0;
     type = type || 'day';
     const { year, month, day, hours, minutes, seconds } = this.dateObject; 
@@ -97,7 +97,7 @@ class Moment {
    * @param type 'y' | 'm' | 'd' 默认为 'd'
    * @returns Moment
    */
-  addDate(val: number = 0, type?: 'y' | 'm' | 'd'): Moment {
+  addDate(val: number = 0, type?: 'y' | 'm' | 'd'): this {
     type = type || 'd';
     const trans = {y: 'year', m: 'month', d: 'day'} as const;
     return this.add(val, trans[type]);
@@ -109,7 +109,7 @@ class Moment {
    * @param type 'h' | 'm' | 's' 默认为 'h'
    * @returns Moment
    */
-  addTime(val: number = 0, type?: 'h' | 'm' | 's'): Moment {
+  addTime(val: number = 0, type?: 'h' | 'm' | 's'): this {
     type = type || 'h';
     const trans = {h: 'hour', m: 'minute', s: 'second'} as const;
     return this.add(val, trans[type]);
@@ -120,7 +120,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addDay(val: number = 0): Moment {
+  addDay(val: number = 0): this {
     return this.add(val, 'day');
   }
 
@@ -129,7 +129,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addWeek(val: number = 0): Moment {
+  addWeek(val: number = 0): this {
     const days = val * 7;
     return this.add(days, 'day');
   }
@@ -139,7 +139,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addMonth(val: number = 0): Moment {
+  addMonth(val: number = 0): this {
     return this.add(val, 'month');
   }
 
@@ -148,7 +148,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addYear(val: number = 0): Moment {
+  addYear(val: number = 0): this {
     return this.add(val, 'year');
   }
 

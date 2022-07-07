@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2019-02-18 11:41:51
- * @LastEditTime: 2022-05-27 15:50:26
+ * @LastEditTime: 2022-07-07 16:17:40
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \js-moment\webpack.config.ts
@@ -41,6 +41,6 @@ module.exports = {
   },
   optimization: {
     minimize: !!isMinify,
-    minimizer: [new TerserPlugin()],
+    // minimizer: [new TerserPlugin()],
   },
 };

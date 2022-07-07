@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 15:08:55
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-06-20 09:50:12
+ * @LastEditTime: 2022-07-06 10:38:09
  * @FilePath: \js-moment\moment.d.ts
  * @js-moment ts类型声明文件
  */

@@ -11,6 +11,7 @@
     "moment",
     "date",
     "time",
+    "parse",
     "format",
     "validate",
     "timestamp",

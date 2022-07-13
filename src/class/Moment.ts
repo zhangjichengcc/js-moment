@@ -1,8 +1,8 @@
-import moment from "../index";
-import DateObject from '../class/DateObject';
-import { format } from '../format';
-import { diff } from '../diff';
-import { localeProps } from '../locale';
+import moment from "@/index";
+import DateObject from '@class/DateObject';
+import { format } from '@/format';
+import { diff } from '@/diff';
+import { localeProps } from '@/locale';
 
 /**
  * 日期对象类
@@ -97,7 +97,7 @@ class Moment {
    * @param type 'y' | 'm' | 'd' 默认为 'd'
    * @returns Moment
    */
-  addDate(val: number = 0, type?: 'y' | 'm' | 'd'): this {
+  addDate(val = 0, type?: 'y' | 'm' | 'd'): this {
     type = type || 'd';
     const trans = {y: 'year', m: 'month', d: 'day'} as const;
     return this.add(val, trans[type]);
@@ -109,7 +109,7 @@ class Moment {
    * @param type 'h' | 'm' | 's' 默认为 'h'
    * @returns Moment
    */
-  addTime(val: number = 0, type?: 'h' | 'm' | 's'): this {
+  addTime(val = 0, type?: 'h' | 'm' | 's'): this {
     type = type || 'h';
     const trans = {h: 'hour', m: 'minute', s: 'second'} as const;
     return this.add(val, trans[type]);
@@ -120,7 +120,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addDay(val: number = 0): this {
+  addDay(val = 0): this {
     return this.add(val, 'day');
   }
 
@@ -129,7 +129,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addWeek(val: number = 0): this {
+  addWeek(val = 0): this {
     const days = val * 7;
     return this.add(days, 'day');
   }
@@ -139,7 +139,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addMonth(val: number = 0): this {
+  addMonth(val = 0): this {
     return this.add(val, 'month');
   }
 
@@ -148,7 +148,7 @@ class Moment {
    * @param val : number
    * @returns : Moment
    */
-  addYear(val: number = 0): this {
+  addYear(val = 0): this {
     return this.add(val, 'year');
   }
 
@@ -175,6 +175,7 @@ class Moment {
    * @returns Object
    */
   fromTo(date?: string | Date) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const begin = this, 
       end = moment(date);
     return diff(begin, end);

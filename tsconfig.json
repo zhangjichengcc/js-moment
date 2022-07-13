@@ -1,7 +1,7 @@
 /*
  * @Author: zhangjicheng
  * @Date: 2021-04-01 17:43:16
- * @LastEditTime: 2022-07-08 17:45:24
+ * @LastEditTime: 2022-07-13 18:00:08
  * @LastEditors: zhangjicheng
  * @Description: 
  * @FilePath: \js-moment\tsconfig.json
@@ -12,7 +12,7 @@
   "compilerOptions": {
     "outDir": "./lib/",
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "ES2015",
     "target": "ES6",
     // "lib": [ "dom", "es5", "es2015.promise" ,"es2015", "es2017", "ES2020"],
     "sourceMap": true, // 调试 ts 源码 
@@ -20,9 +20,14 @@
     // "experimentalDecorators": true, 去除js装饰器警告
     "esModuleInterop": true, // 允许export=导出，由import from 导入
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "baseUrl": "./",  
+    "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@class/*": ["./src/class/*"],
+      "@/*": ["src/*"],
+      "@class/*": ["src/class/*"],
     }
   },
   "include": [

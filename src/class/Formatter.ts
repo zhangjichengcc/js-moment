@@ -2,12 +2,12 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-19 10:14:19
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-05-26 20:44:55
+ * @LastEditTime: 2022-07-13 18:28:16
  * @FilePath: \js-moment\src\class\Formatter.ts
  */
 
-import Moment from './Moment';
-import locale, { localeProps } from '../locale';
+import Moment from '@class/Moment';
+import locale, { localeProps } from '@/locale';
 
 class Formatter {
   

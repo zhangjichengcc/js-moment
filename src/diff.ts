@@ -139,8 +139,8 @@ function diff(begin: Moment, end: Moment) {
       const objs: {[key in formatStrParams]: number} = { 
         y: years, M: months, d: days, h: hours, m: minutes, s: seconds
       };
-      Object.keys(objs).forEach((key: formatStrParams) => {
-        str = str.replace(key, String(objs[key]));
+      Object.keys(objs).forEach((key) => {
+        str = str.replace(key, String(objs[key as formatStrParams]));
       })
     } else {
       str = 

@@ -1,0 +1,27 @@
+/*
+ * @Author: zhangjicheng
+ * @Date: 2022-07-13 10:54:39
+ * @LastEditors: zhangjicheng
+ * @LastEditTime: 2022-07-13 16:24:26
+ * @FilePath: \rollupDemo\.eslintrc.json
+ */
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [2] // 使用typescript-eslint 替换 eslint 的 no-unused-vars 规避定义ts类型时报参数未使用的错误
+  }
+}

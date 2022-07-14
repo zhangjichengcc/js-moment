@@ -2,7 +2,7 @@
 
 <div align="center">
 
-超轻量级的 moment 格式化及计算时间的组件。
+轻量级日期操作工具类 js-moment。
 
 ![](https://img.shields.io/npm/v/js-moment.svg?style=flat)
 ![](https://img.shields.io/bundlephobia/minzip/js-moment?color=green&label=gzip)
@@ -14,17 +14,16 @@
 
 ## ✨ 特性
 
-- 引入即用的高质量轻量 moment 组件。
-- 剔除 moment.js、day.js等日期组件的冗余方法，注重常用方法及**开放性**，暴露更多接口来支持各种场景
-- 更小更高效
+- 轻量：gzip 大小不足3kb
+- 精简：剔除 moment.js、day.js等日期组件的冗余方法，注重常用方法及**开放性**，暴露更多接口来支持各种场景
+- 易用：完善的ts参数及方法提示，让您不查看文档也可玩转 js-moment
+- 通用：包含通用的日期处理方法，包括日期加减、格式化、相对时间等常用方法
 
 ## 🖥 支持环境
 
 - 现代浏览器和 IE9 及以上。
 
-| [IE / Edge](http://godban.github.io/browsers-support-badges/) | [Firefox](http://godban.github.io/browsers-support-badges/) | [Chrome](http://godban.github.io/browsers-support-badges/) | [Safari](http://godban.github.io/browsers-support-badges/) | [Opera](http://godban.github.io/browsers-support-badges/) | [Electron](http://godban.github.io/browsers-support-badges/) |
-| --------- | --------- | --------- | --------- | --------- | --------- |
-| IE9, IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+- node
 
 ## 📦 安装
 
@@ -33,16 +32,14 @@
 ```
 
 ``` js
+  // esm
   import moment form 'js-moment';
+
+  // commonjs
+  const moment = require('js-moment');
 ```
 
 ## 🔨 示例
-
-<h2 style="text-align: center;">引入</h2>
-
-```js
-  import moment from 'js-moment';
-```
 
 <h2 style="text-align: center;">日期格式化</h2>
 
@@ -295,6 +292,9 @@
 ---
 
 ## 更新日志
+
+- **v3.1.0**  
+  切换 Rollup.js 进行代码打包，支持 ES Module CommonJs 两种方式引入。
 
 - **v3.0.0**  
 

@@ -1,4 +1,4 @@
-import Moment from './class/Moment';
+import Moment from '@/class/Moment';
 
 /**
  * 获取相对时间

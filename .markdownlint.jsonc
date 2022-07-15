@@ -12,6 +12,7 @@
   "MD045": false, 
   // No empty links - 链接的地址不能为空
   "MD042": false, 
+  "MD041": false,
   // Dollar signs used before commands without showing output 
   // 在代码块中，终端命令前不需要有美元符号($) 如果代码块中既有终端命令，也有命令的输出，则终端命令前可以有美元符号($)
   "MD014": false, 

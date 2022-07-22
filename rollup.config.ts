@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-07-11 11:42:43
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-07-13 18:13:13
+ * @LastEditTime: 2022-07-21 17:10:34
  * @FilePath: \js-moment\rollup.config.ts
  */
 import babel from 'rollup-plugin-babel';

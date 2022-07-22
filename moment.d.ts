@@ -2,7 +2,7 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-11 15:08:55
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-07-06 10:38:09
+ * @LastEditTime: 2022-07-21 18:50:22
  * @FilePath: \js-moment\moment.d.ts
  * @js-moment ts类型声明文件
  */
@@ -16,6 +16,7 @@ type inputDate = Date | string;
  */
 declare function moment(date?: inputDate): moment.Moment;
 
+// eslint-disable-next-line no-redeclare
 declare namespace moment {
 
   /**

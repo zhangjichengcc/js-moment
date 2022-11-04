@@ -293,6 +293,9 @@
 
 ## 更新日志
 
+- **v3.1.1**  
+  实现 UTC (yyyy-MM-dd'T'HH:mm:ss.SSSZ) 转为标准北京时间。
+
 - **v3.1.0**  
   切换 Rollup.js 进行代码打包，支持 ES Module CommonJs 两种方式引入。
 

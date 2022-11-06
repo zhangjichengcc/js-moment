@@ -2,8 +2,8 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:31:15
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-11-04 19:08:02
- * @FilePath: \js-moment\src\utils.ts
+ * @LastEditTime: 2022-11-07 00:36:23
+ * @FilePath: /js-moment/src/utils.ts
  */
 
 /**
@@ -14,16 +14,16 @@
  function standardDate(str?: string | Date): Date {
   let date = str || new Date;
   if (typeof date === 'string') {
-    date = date.replace(/-/g, '/');
+    let [, year, month, day, hour, minute, second]: <string | number>[] = date
+    .replace(/-/g, '/')
     // ? 处理UTC日期格式 yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    .replace(/T/g, ' ')
+    .replace(/\.\d{3}Z/g, '')
+    .match(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}):(\d{2}):(\d{2})/);
+
+    [year, month, day, hour, minute, second] = [year, month, day, hour, minute, second].map(i => Number(i));
     if (/^\d{4}\/\d{2}\/\d{2}T\d{2}:\d{2}:\d{2}/.test(date)) {
-      date = new Date(
-      date
-      .replace(/T/g, ' ')
-      .replace(/\.\d{3}Z/g, '')
-      // .replace(/(?<=(\d{4}\/\d{2}\/\d{2}\s))(\d{2})(?=(:\d{2}:\d{2}))/, (h) => String(Number(h) + 8)) // ! (?<=) 反向预查询兼容问题
-      .replace(/(\d{4}\/\d{2}\/\d{2}\s)(\d{2})(?=(:\d{2}:\d{2}))/, (_, $1, $2) => `${$1}${String(Number($2) + 8)}`)
-      )
+      day += 8;
     }
     date = new Date(date);
   }

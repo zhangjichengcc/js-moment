@@ -2,20 +2,11 @@
  * @Author: zhangjicheng
  * @Date: 2022-05-13 18:31:15
  * @LastEditors: zhangjicheng
- * @LastEditTime: 2022-11-07 14:29:33
+ * @LastEditTime: 2022-11-07 14:59:19
  * @FilePath: \js-moment\src\utils.ts
  */
 
-interface DateArgs {
-  year: number,
-  month: number,
-  day:number,
-  hour: number,
-  minute: number,
-  second: number,
-}
-
-function Str2Date(str: string): Date {
+function str2Date(str: string): Date {
   // 是否为UTC时间
   const isUTC = /^\d{4}[\\/|-]\d{2}[\\/|-]\d{2}T\d{2}:\d{2}:\d{2}/.test(str);
   let date;
@@ -48,16 +39,8 @@ function Str2Date(str: string): Date {
  * @returns Date
  */
  function standardDate(str?: string | Date): Date {
-  let date = str || new Date;
-  if (typeof date === 'string') {
-    const dateArgs = Str2Date(date);
-    if (!dateArgs) throw new Error('Incoming parameters Invalid Date');
-    const { year, month, hour, minute, second } = dateArgs;
-    let { day } = dateArgs;
-    if (/^\d{4}\/\d{2}\/\d{2}T\d{2}:\d{2}:\d{2}/.test(date)) day += 8;
-    date = new Date(year, month, day, hour, minute, second);
-  }
-  return date;
+  const date = str || new Date;
+  return typeof date === 'string' ? str2Date(date) : date;
 }
 
 export {
